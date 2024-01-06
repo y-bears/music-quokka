@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .square {
+            width: 30px;
+            height: 30px;
+            background-color: lightgray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .square.painted {
+            background-color: green;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+  <h3 class="header" for="">[Rhythm Generator]</h3>
+    <div id="rh1">
+        <label for="bars">bars:</label>
+    <select id="bars" name="bars">
+        
+            <!-- Populate options from 1 to 8 -->
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select><br>
+        <label for="notes">note lengths:</label>
+        <form id="notes" action="">
+            <label>
+              <input type="checkbox" name="checkbox" value="1"> 1
+            </label>
+            <br>
+            <label>
+              <input type="checkbox" name="checkbox" value="2"> 2
+            </label>
+            <br>
+            <label>
+              <input type="checkbox" name="checkbox" value="4" checked> 4
+            </label>
+            <br>
+            <label>
+              <input type="checkbox" name="checkbox" value="8" checked> 8
+            </label>
+            <br>
+            <label>
+              <input type="checkbox" name="checkbox" value="16"> 16
+            </label>
+            <br>
+            <label>
+              <input type="checkbox" name="checkbox" value="32"> 32
+            </label>
+          </form>
+          <button id="rhythmButton">go!</button><br><br>
+    </div>
+    <div id="rh2">
+
+    </div>
+
+    <script src="rhythm.js"></script>
+</body>
+</html>
