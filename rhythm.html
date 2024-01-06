@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rhythm Geneartor</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -22,67 +25,96 @@
             width: 30px;
             height: 30px;
             background-color: lightgray;
-            display: flex;
+            display: flex; /* or display: inline-flex; */
             align-items: center;
             justify-content: center;
             cursor: pointer;
-        }
+            min-width: 10px;
+          }
 
-        .square.painted {
+        .square.painted1 {
             background-color: green;
             color: white;
         }
+
+        .square.painted2 {
+            background-color: rgb(2, 204, 2);
+            color: white;
+        }
+
+        .column {
+            float: left;
+            width: auto;
+            padding: 0px;
+            min-width: 150px;
+            
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        #customRest {
+          width: 70%;
+        }
+
     </style>
 </head>
 <body>
 
-  <h3 class="header" for="">[Rhythm Generator]</h3>
-    <div id="rh1">
-        <label for="bars">bars:</label>
-    <select id="bars" name="bars">
-        
-            <!-- Populate options from 1 to 8 -->
-            <option value="1">1</option>
-            <option value="2" selected>2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-        </select><br>
-        <label for="notes">note lengths:</label>
-        <form id="notes" action="">
-            <label>
-              <input type="checkbox" name="checkbox" value="1"> 1
-            </label>
-            <br>
-            <label>
-              <input type="checkbox" name="checkbox" value="2"> 2
-            </label>
-            <br>
-            <label>
-              <input type="checkbox" name="checkbox" value="4" checked> 4
-            </label>
-            <br>
-            <label>
-              <input type="checkbox" name="checkbox" value="8" checked> 8
-            </label>
-            <br>
-            <label>
-              <input type="checkbox" name="checkbox" value="16"> 16
-            </label>
-            <br>
-            <label>
-              <input type="checkbox" name="checkbox" value="32"> 32
-            </label>
+  <h3 class="header">[Rhythm Generator]</h3>
+  
+  <label for="bars">bars:</label>
+  <select id="bars" name="bars">
+      <!-- Populate options from 1 to 8 -->
+      <option value="1">1</option>
+      <option value="2" selected>2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+  </select>
+
+
+  <div class="container">
+      
+      <div class="row">
+        <div class="column">
+          <label for="notes">note lengths:</label>
+          <form id="notes" action="">
+              <label><input type="checkbox" name="checkbox" value="1"> 1</label><br>
+              <label><input type="checkbox" name="checkbox" value="2"> 2</label><br>
+              <label><input type="checkbox" name="checkbox" value="4" checked> 4</label><br>
+              <label><input type="checkbox" name="checkbox" value="8" checked> 8</label><br>
+              <label><input type="checkbox" name="checkbox" value="16"> 16</label><br>
+              <label><input type="checkbox" name="checkbox" value="32"> 32</label>
           </form>
-          <button id="rhythmButton">go!</button><br><br>
-    </div>
-    <div id="rh2">
+          </div>
 
-    </div>
+          <div class="column">
+              <label for="rests">rests [r]:</label><br>
+              <input type="radio" name="restType" value="0"> off<br>
+              <input type="radio" name="restType" value="1" checked> default<br>
+              <input type="radio" name="restType" value="2"> random<br>
+              <input type="radio" name="restType" value="3"> custom chance<br>
+              <input type="range" id="customRest" name="customRest" min="1" max="90" value="20">
 
-    <script src="rhythm.js"></script>
+          </div>
+      </div>
+    
+  </div>
+
+  <div>
+      <button id="rhythmButton">go!</button><br><br>
+  </div>
+
+  <div id="rh2">
+      <!-- Content for #rh2 goes here -->
+  </div>
+
+  <script src="rhythm.js"></script>
 </body>
 </html>
