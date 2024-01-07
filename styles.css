@@ -12,6 +12,7 @@ body {
 }
 
 
+
 label {
    margin-right: 3px;
    margin-left: 3px;
@@ -114,4 +115,10 @@ button:hover {
     width: 150px; /* Adjust the width as needed */
     height: auto; /* Maintain aspect ratio */
     margin: 10px;
+}
+
+@media (max-width: 700px) {
+  body {
+      margin: 3px; /* Remove margin when display width is less than 700px */
+  }
 }

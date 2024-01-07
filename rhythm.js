@@ -55,23 +55,26 @@ document.getElementById('rhythmButton').addEventListener('click', function() {
     console.log("clear rh2");
      // Create bars with squares dynamically
      for (let i = 0; i < barsCount; i++) {
-        const row = document.createElement('div');
+        let row = document.createElement('div');
         row.className = 'row';
         let prev = 0; //track previous
         let isRest = 0;
         //testing
         //let counter = 1;
+        let column1 = document.createElement('div');
+        column1.className = 'column1';
 
         let savedNote = checkedValues[Math.floor(Math.random() * checkedValues.length)];
     
         for (let j = 0, paint = 0; j < largestCheckedValue; j++, paint++) {
-            const square = document.createElement('div');
+           const square = document.createElement('div');
             square.className = 'square';
     
             // margin for every 4th
             if ((j + 1) % 4 === 0) {
                 square.style.marginRight = '20px';
             }
+
     
             // Randomly choose a number from the checked values
             const chosenNumber = checkedValues[Math.floor(Math.random() * checkedValues.length)];
@@ -101,12 +104,21 @@ document.getElementById('rhythmButton').addEventListener('click', function() {
                 }
             }
 
-            
-            row.appendChild(square);
+            if (j % 8 === 0) {
+                // Create a new column1 div for every 8 squares within the same bar
+                column1 = document.createElement('div');
+                column1.className = 'column1';
+                row.appendChild(column1);
+            }
+
+ // Append the square to the row
+ column1.appendChild(square);
+
+
         }
-    
-        document.getElementById('rh2').appendChild(row);
-        console.log("end row");
-    }
-    
-});
+        
+            row.appendChild(column1);
+
+            document.getElementById('rh2').appendChild(row);
+     }
+    });
