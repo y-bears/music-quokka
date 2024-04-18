@@ -1,1 +1,215 @@
-const _0x3851d1=_0x32ab;(function(_0x469568,_0xa3de1f){const _0x4d2a91=_0x32ab,_0x584bce=_0x469568();while(!![]){try{const _0x301ea1=parseInt(_0x4d2a91(0x8c))/0x1+parseInt(_0x4d2a91(0x86))/0x2*(-parseInt(_0x4d2a91(0xba))/0x3)+-parseInt(_0x4d2a91(0xac))/0x4+parseInt(_0x4d2a91(0x89))/0x5*(parseInt(_0x4d2a91(0x99))/0x6)+parseInt(_0x4d2a91(0xcb))/0x7+-parseInt(_0x4d2a91(0xb0))/0x8+-parseInt(_0x4d2a91(0xcd))/0x9*(-parseInt(_0x4d2a91(0x92))/0xa);if(_0x301ea1===_0xa3de1f)break;else _0x584bce['push'](_0x584bce['shift']());}catch(_0x4fff87){_0x584bce['push'](_0x584bce['shift']());}}}(_0xf045,0xc72b9));var scales={'C\x20major':['C','Dm','Em','F','G','Am',_0x3851d1(0xa9)],'C#\x20major':['C#',_0x3851d1(0xc2),_0x3851d1(0xa6),'F#','G#',_0x3851d1(0xbe),_0x3851d1(0xbd)],'Db\x20major':['Db','Ebm','Fm','Gb','Ab',_0x3851d1(0x88),_0x3851d1(0xbf)],'D\x20major':['D','Em',_0x3851d1(0xb3),'G','A','Bm',_0x3851d1(0x96)],'Eb\x20major':['Eb','Fm','Gm','Ab','Bb','Cm',_0x3851d1(0x8a)],'E\x20major':['E',_0x3851d1(0xb3),_0x3851d1(0xb2),'A','B','C#m',_0x3851d1(0xc3)],'F\x20major':['F','Gm','Am','Bb','C','Dm','Edim'],'F#\x20major':['F#',_0x3851d1(0xb2),_0x3851d1(0xbe),'B','C#',_0x3851d1(0xc2),_0x3851d1(0xb8)],'Gb\x20major':['Gb',_0x3851d1(0xc1),_0x3851d1(0x88),'Cb','Db',_0x3851d1(0xa4),'Fdim'],'G\x20major':['G','Am','Bm','C','D','Em','F#dim'],'Ab\x20major':['Ab',_0x3851d1(0x88),'Cm','Db',_0x3851d1(0xa4),'Fm','Gdim'],'A\x20major':['A','Bm',_0x3851d1(0xc8),'D','E',_0x3851d1(0xb3),'G#dim'],'Bb\x20major':['Bb','Cm','Dm','Eb','F','Gm',_0x3851d1(0xc4)],'B\x20major':['B',_0x3851d1(0xc8),'D#m','E','F#','G#m','A#dim'],'A\x20minor':['Am','Bdim','C','Dm','Em','F','G'],'A#\x20minor':[_0x3851d1(0xbe),_0x3851d1(0xbd),'C#',_0x3851d1(0xc2),'E#m','F#','G#'],'Bb\x20minor':[_0x3851d1(0x88),'Cdim','Db',_0x3851d1(0xa4),'Fm','Gb','Ab'],'B\x20minor':['Bm',_0x3851d1(0x96),'D','Em',_0x3851d1(0xb3),'G','A'],'C\x20minor':['Cm','Ddim','Eb','Fm','Gm','Ab','Bb'],'C#\x20minor':[_0x3851d1(0xc8),_0x3851d1(0x8a),'E',_0x3851d1(0xb3),_0x3851d1(0xb2),'A','B'],'D\x20minor':['Dm',_0x3851d1(0xc5),'F','Gm','Am','Bb','C'],'D#\x20minor':[_0x3851d1(0xc2),'E#dim','F#','G#m',_0x3851d1(0xbe),'B','C#'],'Eb\x20minor':[_0x3851d1(0xa4),_0x3851d1(0x8b),'Gb',_0x3851d1(0xc1),_0x3851d1(0x88),'Cb','Db'],'E\x20minor':['Em',_0x3851d1(0xa3),'G','Am','Bm','C','D'],'F\x20minor':['Fm',_0x3851d1(0x9f),'Ab',_0x3851d1(0x88),'Cm','Db',_0x3851d1(0xa4)],'F#\x20minor':[_0x3851d1(0xb3),_0x3851d1(0xbb),'A','Bm',_0x3851d1(0xc8),'D','E'],'G\x20minor':['Gm','Adim','Bb','Cm','Dm','Eb','F'],'G#\x20minor':[_0x3851d1(0xb2),_0x3851d1(0xc9),'B','C#','D#','E','F#']};function chord(_0x3b6232){const _0x80d580=_0x3851d1;let _0x3d7871,_0x21c8f9,_0x210626;if(_0x3b6232[_0x80d580(0xaf)](_0x80d580(0xcf))){let _0x4e2fd7=Math[_0x80d580(0xce)]()<0.05;console[_0x80d580(0xca)]('seven',_0x4e2fd7);_0x4e2fd7?_0x3d7871=0x7:(_0x3d7871=Math['floor'](Math['random']()*0x6)+0x1,console[_0x80d580(0xca)]('ch\x20=\x20',_0x3d7871));_0x21c8f9=Math[_0x80d580(0xcc)](Math[_0x80d580(0xce)]()*(0x6-0x1+0x1)+0x1);while(_0x21c8f9==_0x3d7871){_0x21c8f9=Math[_0x80d580(0xcc)](Math[_0x80d580(0xce)]()*(0x6-0x1+0x1)+0x1);}console['log'](_0x80d580(0x9d),_0x21c8f9),_0x210626=Math['floor'](Math[_0x80d580(0xce)]()*(0x6-0x1+0x1)+0x1),console['log'](_0x210626);while(_0x210626==_0x3d7871||_0x210626==_0x21c8f9){_0x210626=Math['floor'](Math[_0x80d580(0xce)]()*(0x6-0x1+0x1)+0x1);}console[_0x80d580(0xca)]('ch\x20alter\x202',_0x210626);}else{let _0x429c03=Math[_0x80d580(0xce)]()<0.05;console['log'](_0x80d580(0x97),_0x429c03);if(_0x429c03)_0x3d7871=0x2,console[_0x80d580(0xca)](_0x80d580(0xad),_0x3d7871);else{_0x3d7871=Math[_0x80d580(0xcc)](Math[_0x80d580(0xce)]()*0x7)+0x1,console[_0x80d580(0xca)](_0x80d580(0xad),_0x3d7871);while(_0x3d7871==0x2){_0x3d7871=Math[_0x80d580(0xcc)](Math[_0x80d580(0xce)]()*(0x7-0x1+0x1)+0x1);}console[_0x80d580(0xca)](_0x80d580(0xad),_0x3d7871);}_0x21c8f9=Math[_0x80d580(0xcc)](Math[_0x80d580(0xce)]()*(0x7-0x1+0x1)+0x1);while(_0x21c8f9==_0x3d7871||_0x21c8f9==0x2){_0x21c8f9=Math[_0x80d580(0xcc)](Math[_0x80d580(0xce)]()*(0x7-0x1+0x1)+0x1);}console[_0x80d580(0xca)](_0x80d580(0x9d),_0x21c8f9),_0x210626=Math['floor'](Math['random']()*(0x7-0x1+0x1)+0x1);while(_0x210626==_0x3d7871||_0x210626==_0x21c8f9||_0x210626==0x2){_0x210626=Math[_0x80d580(0xcc)](Math[_0x80d580(0xce)]()*(0x7-0x1+0x1)+0x1);}console[_0x80d580(0xca)](_0x80d580(0xaa),_0x210626);};let _0x43baf9=Math[_0x80d580(0xcc)](Math[_0x80d580(0xce)]()*(0x64-0x0+0x1)+0x1);_0x43baf9<0x64&&(_0x43baf9='\u00a0'+_0x43baf9);;_0x43baf9<0xa&&(_0x43baf9='\u00a0'+_0x43baf9);;let _0x12f2d8=Math[_0x80d580(0xcc)](Math['random']()*(0x64-0x0+0x1)+0x1);_0x12f2d8<0x64&&(_0x12f2d8='\u00a0'+_0x12f2d8);;_0x12f2d8<0xa&&(_0x12f2d8='\u00a0'+_0x12f2d8);;let _0x63cffd=Math[_0x80d580(0xcc)](Math['random']()*(0x64-0x0+0x1)+0x1);_0x63cffd<0x64&&(_0x63cffd='\u00a0'+_0x63cffd);;_0x63cffd<0xa&&(_0x63cffd='\u00a0'+_0x63cffd);;return{'ch':_0x3d7871,'ch_alter':_0x21c8f9,'ch_alter2':_0x210626,'seventh':_0x43baf9,'additional':_0x12f2d8,'additional2':_0x63cffd};}function notesAndInversion(){const _0x18d7dd=_0x3851d1,_0x57a6c2=[_0x18d7dd(0x91),_0x18d7dd(0xa5),_0x18d7dd(0x8e)];let _0x310d3d=_0x57a6c2[Math['floor'](Math[_0x18d7dd(0xce)]()*(0x2-0x0+0x1)+0x0)],_0x4374ce=Math['floor'](Math['random']()*(0x6-0x1+0x1)+0x1);return{'inv':_0x310d3d,'notes_c':_0x4374ce};}function _0x32ab(_0x5daa3b,_0x4a60f1){const _0xf0459a=_0xf045();return _0x32ab=function(_0x32ab2d,_0x3ceac1){_0x32ab2d=_0x32ab2d-0x86;let _0x35a357=_0xf0459a[_0x32ab2d];return _0x35a357;},_0x32ab(_0x5daa3b,_0x4a60f1);}function getChords(_0x1cc78a,_0x4803a3){const _0x17efa1=_0x3851d1;let _0x1c8209=document['getElementById'](_0x17efa1(0xbc));_0x1c8209['innerHTML']='';let {inv:_0x29155f,notes_c:_0x201d6c}=notesAndInversion(),_0x12f1fd=scales[_0x4803a3];console['log'](_0x17efa1(0xc0),_0x12f1fd);let _0x4be565=_0x17efa1(0xc7)+_0x29155f+',\x20notes\x20=\x20'+_0x201d6c+_0x17efa1(0xb7);const _0x39c7e1=0x5;for(let _0x56c6f2=0x0;_0x56c6f2<_0x1cc78a;_0x56c6f2++){let {ch:_0x104827,ch_alter:_0x4ae586,ch_alter2:_0x27d070,seventh:_0x36b71f,additional:_0x493a67,additional2:_0x43f171}=chord(_0x4803a3),_0x4104e2='['+_0x104827+'][\x20<span\x20class=\x22white-bold\x22>'+_0x12f1fd[_0x104827-0x1][_0x17efa1(0xb4)](_0x39c7e1,'\u00a0')+_0x17efa1(0xb6)+_0x36b71f+',\x20(alt\u00a0'+_0x4ae586+'\u00a0'+_0x12f1fd[_0x4ae586-0x1][_0x17efa1(0xb4)](_0x39c7e1,'\u00a0')+'\u00a0'+_0x27d070+'\u00a0'+_0x12f1fd[_0x27d070-0x1][_0x17efa1(0xb4)](_0x39c7e1,'\u00a0')+'),\x20(add\u00a0'+_0x493a67+',\u00a0'+_0x43f171+')';_0x4be565+=_0x4104e2+_0x17efa1(0x9e);}let _0x32ed8d='';for(let _0x4aa1a2=0x0;_0x4aa1a2<_0x12f1fd[_0x17efa1(0xc6)];_0x4aa1a2++){_0x32ed8d+='['+(_0x4aa1a2+0x1)+']\x20'+_0x12f1fd[_0x4aa1a2]+'\x20';}_0x4be565+='<br><br>'+_0x32ed8d,_0x1c8209['innerHTML']=_0x4be565;}function rhythm(){const _0x4b7028=_0x3851d1;let _0x5f0aa3=[0.5,0x1,0x1],_0xb4d98=[0x1],_0x3a9a90=0x0,_0xb318cd=0x1;while(_0x3a9a90<0x3){_0xb4d98[_0xb318cd]=_0x5f0aa3[Math['floor'](Math[_0x4b7028(0xce)]()*(0x2-0x0+0x1)+0x0)],_0x3a9a90+=_0xb4d98[_0xb318cd];_0x3a9a90>0x3&&(_0xb4d98[_0xb318cd]=_0xb4d98[_0xb318cd]-(_0x3a9a90-0x3));;_0xb318cd++;}return[_0xb4d98,_0xb318cd];}function _0xf045(){const _0x1ad08d=['43514umBmEg','textContent','Bbm','381515yQsHyR','Ddim','Fdim','302513PmPMUx','click','5th','randButton','display','root','30acAuhS','value','style','onclick','C#dim','usetwo\x20=\x20','infoButton','12weqfAP','getElementById','numButton','scaleSelect','ch\x20alter\x20=\x20','<br>','Gdim','Show\x20Info','none','resultRh','F#dim','Ebm','3rd','E#m','addEventListener','DOMContentLoaded','Bdim','ch\x20alter\x202\x20=\x20','num','2471360ynfkvV','ch\x20=\x20','innerHTML','includes','4542888YGynbQ','block','G#m','F#m','padEnd','clear','</span>\x20]\x20%7\u00a0=','<br><br>','E#dim','Hide\x20Info','219TajJcQ','G#dim','resultCh','B#dim','A#m','Cdim','scale\x20=\x20','Abm','D#m','D#dim','Adim','Edim','length','inversion\x20=\x20','C#m','A#dim','log','4556041BaHQYY','floor','7451343LpbEyV','random','major','join'];_0xf045=function(){return _0x1ad08d;};return _0xf045();}document[_0x3851d1(0x9a)](_0x3851d1(0x8f))['onclick']=function(){const _0x12f765=_0x3851d1;console[_0x12f765(0xb5)]();let _0x161b17=Math['floor'](Math[_0x12f765(0xce)]()*(0x8-0x2+0x1)+0x2);document['getElementById']('num')[_0x12f765(0x93)]=_0x161b17,document['getElementById'](_0x12f765(0xa2))[_0x12f765(0xae)]='';let _0x21db0d=document[_0x12f765(0x9a)](_0x12f765(0x9c))[_0x12f765(0x93)];getChords(_0x161b17,_0x21db0d);},document['getElementById'](_0x3851d1(0x9b))[_0x3851d1(0x95)]=()=>{const _0x3ae58b=_0x3851d1;console[_0x3ae58b(0xb5)]();let _0x65b63f=document['getElementById'](_0x3ae58b(0xab))[_0x3ae58b(0x93)],_0x33ee16=document['getElementById'](_0x3ae58b(0x9c))[_0x3ae58b(0x93)];getChords(_0x65b63f,_0x33ee16);},document[_0x3851d1(0x9a)]('rh')[_0x3851d1(0x95)]=function(){const _0x318c07=_0x3851d1;console['clear']();let _0x585b82=rhythm();document[_0x318c07(0x9a)](_0x318c07(0xa2))[_0x318c07(0xae)]=_0x585b82[0x0][_0x318c07(0xd0)](',\x20');let _0x4a19d8=_0x585b82[0x1];document[_0x318c07(0x9a)](_0x318c07(0xab))['value']=_0x4a19d8;let _0x3c4dcd=document[_0x318c07(0x9a)](_0x318c07(0x9c))[_0x318c07(0x93)];getChords(_0x4a19d8,_0x3c4dcd);},document['addEventListener'](_0x3851d1(0xa8),function(){const _0x84ab99=_0x3851d1;var _0x5aab21=document[_0x84ab99(0x9a)]('infoText');_0x5aab21[_0x84ab99(0x94)][_0x84ab99(0x90)]=_0x84ab99(0xa1);var _0x954e9f=document['getElementById'](_0x84ab99(0x98));_0x954e9f[_0x84ab99(0xa7)](_0x84ab99(0x8d),function(){const _0x1b879f=_0x84ab99;_0x5aab21['style'][_0x1b879f(0x90)]==='none'?(_0x5aab21[_0x1b879f(0x94)][_0x1b879f(0x90)]=_0x1b879f(0xb1),_0x954e9f['textContent']=_0x1b879f(0xb9)):(_0x5aab21[_0x1b879f(0x94)]['display']=_0x1b879f(0xa1),_0x954e9f[_0x1b879f(0x87)]=_0x1b879f(0xa0));});});
+var scales = {
+    'C major': ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'],
+    'C# major': ['C#', 'D#m', 'E#m', 'F#', 'G#', 'A#m', 'B#dim'],
+    'Db major': ['Db', 'Ebm', 'Fm', 'Gb', 'Ab', 'Bbm', 'Cdim'],
+    'D major': ['D', 'Em', 'F#m', 'G', 'A', 'Bm', 'C#dim'],
+    'Eb major': ['Eb', 'Fm', 'Gm', 'Ab', 'Bb', 'Cm', 'Ddim'],
+    'E major': ['E', 'F#m', 'G#m', 'A', 'B', 'C#m', 'D#dim'],
+    'F major': ['F', 'Gm', 'Am', 'Bb', 'C', 'Dm', 'Edim'],
+    'F# major': ['F#', 'G#m', 'A#m', 'B', 'C#', 'D#m', 'E#dim'],
+    'Gb major': ['Gb', 'Abm', 'Bbm', 'Cb', 'Db', 'Ebm', 'Fdim'],
+    'G major': ['G', 'Am', 'Bm', 'C', 'D', 'Em', 'F#dim'],
+    'Ab major': ['Ab', 'Bbm', 'Cm', 'Db', 'Ebm', 'Fm', 'Gdim'],
+    'A major': ['A', 'Bm', 'C#m', 'D', 'E', 'F#m', 'G#dim'],
+    'Bb major': ['Bb', 'Cm', 'Dm', 'Eb', 'F', 'Gm', 'Adim'],
+    'B major': ['B', 'C#m', 'D#m', 'E', 'F#', 'G#m', 'A#dim'],
+    'A minor': ['Am', 'Bdim', 'C', 'Dm', 'Em', 'F', 'G'],
+    'A# minor': ['A#m', 'B#dim', 'C#', 'D#m', 'E#m', 'F#', 'G#'],
+    'Bb minor': ['Bbm', 'Cdim', 'Db', 'Ebm', 'Fm', 'Gb', 'Ab'],
+    'B minor': ['Bm', 'C#dim', 'D', 'Em', 'F#m', 'G', 'A'],
+    'C minor': ['Cm', 'Ddim', 'Eb', 'Fm', 'Gm', 'Ab', 'Bb'],
+    'C# minor': ['C#m', 'Ddim', 'E', 'F#m', 'G#m', 'A', 'B'],
+    'D minor': ['Dm', 'Edim', 'F', 'Gm', 'Am', 'Bb', 'C'],
+    'D# minor': ['D#m', 'E#dim', 'F#', 'G#m', 'A#m', 'B', 'C#'],
+    'Eb minor': ['Ebm', 'Fdim', 'Gb', 'Abm', 'Bbm', 'Cb', 'Db'],
+    'E minor': ['Em', 'F#dim', 'G', 'Am', 'Bm', 'C', 'D'],
+    'F minor': ['Fm', 'Gdim', 'Ab', 'Bbm', 'Cm', 'Db', 'Ebm'],
+    'F# minor': ['F#m', 'G#dim', 'A', 'Bm', 'C#m', 'D', 'E'],
+    'G minor': ['Gm', 'Adim', 'Bb', 'Cm', 'Dm', 'Eb', 'F'],
+    'G# minor': ['G#m', 'A#dim', 'B', 'C#', 'D#', 'E', 'F#']
+};
+
+//ch_num = input('How many chords or [r]andom: ')
+
+function chord(selectedScale) {
+    let ch, ch_alter, ch_alter2;
+    // removing *dim from major
+    if (selectedScale.includes('major')) {
+        let useSeven = Math.random() < 0.05; // Adjust the probability as needed 5%
+        console.log("seven", useSeven);
+        if (useSeven) {
+            ch = 7;
+        } else {
+            ch = Math.floor(Math.random() * 6) + 1; // Random number between 1 and 6
+            console.log("ch = ", ch);
+        }
+        ch_alter = Math.floor(Math.random() * (6 - 1 + 1) + 1);
+        while (ch_alter == ch) {
+            ch_alter = Math.floor(Math.random() * (6 - 1 + 1) + 1);
+        }
+        console.log("ch alter = ", ch_alter);
+        ch_alter2 = Math.floor(Math.random() * (6 - 1 + 1) + 1);
+        console.log(ch_alter2);
+        while (ch_alter2 == ch || ch_alter2 == ch_alter) {
+            ch_alter2 = Math.floor(Math.random() * (6 - 1 + 1) + 1);
+            }
+        console.log("ch alter 2", ch_alter2);
+    } else {
+    //removing 2 from minor
+        let useTwo = Math.random() < 0.05; // Adjust the probability as needed 5%
+        console.log("usetwo = ", useTwo);
+        if (useTwo) {
+            ch = 2;
+            console.log("ch = ", ch);
+        } else {
+            ch = Math.floor(Math.random() * 7) + 1; // Random number between 1 and 7
+            console.log("ch = ", ch);
+            while (ch == 2) {
+                ch = Math.floor(Math.random() * (7 - 1 + 1) + 1);
+            }
+            console.log("ch = ", ch);
+        }
+        ch_alter = Math.floor(Math.random() * (7 - 1 + 1) + 1);
+        while (ch_alter == ch || ch_alter == 2) {
+            ch_alter = Math.floor(Math.random() * (7 - 1 + 1) + 1);
+        }
+        console.log("ch alter = ", ch_alter);
+        ch_alter2 = Math.floor(Math.random() * (7 - 1 + 1) + 1);
+        
+        while (ch_alter2 == ch || ch_alter2 == ch_alter || ch_alter2 == 2) {
+            ch_alter2 = Math.floor(Math.random() * (7 - 1 + 1) + 1);
+            
+        }
+        console.log("ch alter 2 = ", ch_alter2);
+    };
+
+    let seventh = Math.floor(Math.random() * (100 - 0 + 1) + 1);
+    if (seventh < 100) {seventh = '\u00A0' + seventh};
+    if (seventh < 10) {seventh = '\u00A0' + seventh};
+    let additional = Math.floor(Math.random() * (100 - 0 + 1) + 1);
+    if (additional < 100) {additional = '\u00A0' + additional};
+    if (additional < 10) {additional = '\u00A0' + additional};
+    let additional2 = Math.floor(Math.random() * (100 - 0 + 1) + 1);
+    if (additional2 < 100) {additional2 = '\u00A0' + additional2};
+    if (additional2 < 10) {additional2 = '\u00A0' + additional2};
+    return { ch, ch_alter, ch_alter2, seventh, additional, additional2 };
+}
+
+function notesAndInversion() {
+    const inv_list = ['root', '3rd', '5th'];
+    let inv = inv_list[Math.floor(Math.random() * (2 - 0 + 1) + 0)];
+    let notes_c = Math.floor(Math.random() * (6 - 1 + 1) + 1);
+    return {inv, notes_c};
+}
+
+function getChords(ch_num, selectedScale) {
+    // Clear the existing content before adding new chords
+    let resultElement = document.getElementById('resultCh');
+    resultElement.innerHTML = '';
+    let { inv, notes_c } = notesAndInversion();
+    let scale = scales[selectedScale];
+    console.log("scale = ", scale)
+    let resultHTML = `inversion = ${inv}, notes = ${notes_c}<br><br>`; // Build the HTML string outside the loop
+
+    // Find the maximum chord name length in the current scale
+    const maxChordLength = 5; // Set the desired length (5 symbols)
+
+    for (let i = 0; i < ch_num; i++) {
+        let { ch, ch_alter, ch_alter2, seventh, additional, additional2 } = chord(selectedScale);
+       
+        // Modify chord names to ensure a length of 5 symbols
+        // Update the chordHTML line in your code
+        let chordHTML = `[${ch}][ <span class="white-bold">${scale[ch - 1].padEnd(maxChordLength, '\u00A0')}</span> ] %7\u00A0=${seventh}, (alt\u00A0${ch_alter}\u00A0${scale[ch_alter - 1].padEnd(maxChordLength, '\u00A0')}\u00A0${ch_alter2}\u00A0${scale[ch_alter2 - 1].padEnd(maxChordLength, '\u00A0')}), (add\u00A0${additional},\u00A0${additional2})`;
+
+        // Append the chord HTML to the resultHTML string
+        resultHTML += chordHTML + '<br>';
+        //resultHTML += chordHTML.replace(/ /g, '&nbsp;') + '<br>';
+
+    }
+
+    // String to store chords in the selected key
+    let selectedKeyChords = '';
+
+    for (let i = 0; i < scale.length; i++) {
+      selectedKeyChords += `[${i + 1} <span style="font-weight: bold; color: purple;">${scale[i]}</span>] `;
+    }
+
+    // Append the selected key chords to the resultHTML string
+    resultHTML +='<br><br>' + selectedKeyChords;
+
+    // Set the resultHTML string to the result element once, outside the loop
+    resultElement.innerHTML = resultHTML;
+}
+
+
+function rhythm() {
+    let meas = [0.5, 1, 1];
+    //first chord will be 1 bar always
+    let rhythm = [1];
+    let a = 0;
+    let i = 1;
+    while (a < 3) {
+        rhythm[i] = meas[Math.floor(Math.random() * (2 - 0 + 1) + 0)];
+
+        a += rhythm[i];
+        if (a > 3) {
+            rhythm[i] = rhythm[i] - (a - 3);
+
+        };
+        //console.log(rhythm[i], i);
+        i++;
+
+    }
+
+    return [rhythm, i];
+}
+
+document.getElementById('randButton').onclick = function () {
+    console.clear();
+    // 2-8
+    let ch_num = Math.floor(Math.random() * (8 - 2 + 1) + 2);
+    document.getElementById('num').value = ch_num;
+    // clear result from rhythm button
+    document.getElementById('resultRh').innerHTML = '';
+    let selectedScale = document.getElementById('scaleSelect').value;
+    getChords(ch_num, selectedScale);
+
+}
+
+document.getElementById('numButton').onclick = () => {
+    console.clear();
+    let ch_num = document.getElementById('num').value;
+    let selectedScale = document.getElementById('scaleSelect').value;
+    getChords(ch_num, selectedScale);
+    
+}
+
+document.getElementById('rh').onclick = function () {
+    // 2-6
+    console.clear();
+    // get return
+    let funcRet = rhythm();
+    document.getElementById('resultRh').innerHTML = funcRet[0].join(', ');
+    let ch_num = funcRet[1];
+    // save number of chords ion input field to reuse in go button
+    document.getElementById('num').value = ch_num;
+    let selectedScale = document.getElementById('scaleSelect').value;
+    getChords(ch_num, selectedScale);
+    
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var infoText = document.getElementById('infoText');
+    infoText.style.display = 'none';
+
+    var infoButton = document.getElementById('infoButton');
+    infoButton.addEventListener('click', function () {
+      if (infoText.style.display === 'none') {
+        infoText.style.display = 'block';
+        infoButton.textContent = 'Hide Info';
+      } else {
+        infoText.style.display = 'none';
+        infoButton.textContent = 'Show Info';
+      }
+    });
+  });
