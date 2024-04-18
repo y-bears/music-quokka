@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scale and Chords Selector</title>
+    <script src="only-scale.js"></script>
+    <style>
+        /* Centering the main content */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        /* Style for buttons */
+        button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        /* Style for selected buttons */
+        button.selected {
+            background-color: #FF5722;
+        }
+        /* Style for output */
+        #chordsOutput {
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 1.5rem; /* Increased font size */
+            text-align: center;
+        }
+        /* Style for scale output */
+        #selectedScale {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1.25rem; /* Larger font size */
+            text-align: center;
+        }
+    </style>
+</head>
+<body onload="initialize()">
+    <h1>Scale and Chords Selector</h1>
+    
+    <!-- Note selection buttons -->
+    <div id="noteButtons"></div>
+    
+    <!-- Scale mode selection buttons -->
+    <div>
+        <button id="majorButton" onclick="selectScale('major')">Major</button>
+        <button id="minorButton" onclick="selectScale('minor')">Minor</button>
+    </div>
+    
+    <!-- Random selection button -->
+    <div>
+        <button onclick="selectRandom()">Random</button>
+    </div>
+    
+    <!-- Display selected scale -->
+    <div id="selectedScale"></div>
+    
+    <!-- Output for chords -->
+    <div id="chordsOutput"></div>
+</body>
+</html>
