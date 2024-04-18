@@ -134,6 +134,7 @@ function updateSelectedScaleButton() {
 }
 
 // Function to output the selected chords and scale
+// Function to output the selected chords and scale
 function outputChords() {
   const scale = `${selectedNote} ${selectedMode}`;
   let chords;
@@ -151,8 +152,10 @@ function outputChords() {
       // Display the selected scale
       selectedScale.textContent = `Selected Scale: ${selectedNote} ${selectedMode}`;
       
-      // Display the chords in the selected scale
-      chordsOutput.textContent = chords.map((chord, index) => `[${index + 1} ${chord.padEnd(4)}]`).join(' ');
+      // Display the chords in the selected scale with bold and blue styling for chord names
+      chordsOutput.innerHTML = chords.map((chord, index) => {
+          return `[${index + 1} <span style="font-weight: bold; color: blue;">${chord}</span>]`;
+      }).join(' ');
   } else {
       // Display a message if no scale is available
       selectedScale.textContent = `Selected Scale: N/A`;
