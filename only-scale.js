@@ -45,14 +45,14 @@ const minorScales = {};
 
 for (const [scale, chords] of Object.entries(scales)) {
   if (scale.includes('major')) {
-      majorScales[scale] = chords;
+    majorScales[scale] = chords;
   } else if (scale.includes('minor')) {
-      minorScales[scale] = chords;
+    minorScales[scale] = chords;
   }
 }
 
 // Current selection variables
-let selectedNote = 'C';
+let selectedNote = 'A';
 let selectedMode = 'minor';
 
 // Initialize function to set up the UI
@@ -61,15 +61,25 @@ function initialize() {
   
   // Create buttons for each note
   notes.forEach((note) => {
-      const button = document.createElement('button');
-      button.textContent = note;
-      button.onclick = () => selectNoteButton(button, note);
-      noteButtons.appendChild(button);
+    const button = document.createElement('button');
+    button.textContent = note;
+    button.onclick = () => selectNoteButton(button, note);
+    noteButtons.appendChild(button);
+    
+    // Add class to buttons containing "#"
+    if (note.includes('#')) {
+      button.classList.add('contains-hash');
+    }
+    
+    // Highlight the button corresponding to the selected note
+    if (note === selectedNote) {
+      selectNoteButton(button, selectedNote);
+    }
+    
   });
   
   // Set the default selection
   selectScale('minor');
-  selectNote('C');
 }
 
 // Function to handle note selection
@@ -77,8 +87,10 @@ function selectNoteButton(button, note) {
   // Update the selected note
   selectedNote = note;
   
-  // Update button styles
-  updateSelectedNoteButton(button);
+  // Update button styles if a button reference is provided
+  if (button) {
+    updateSelectedNoteButton(button);
+  }
   
   // Output chords
   outputChords();
@@ -112,7 +124,7 @@ function updateSelectedNoteButton(button) {
   
   // Add the 'selected' class to the chosen note button
   if (button) {
-      button.classList.add('selected');
+    button.classList.add('selected');
   }
 }
 
@@ -127,9 +139,9 @@ function updateSelectedScaleButton() {
   
   // Add the 'selected' class to the chosen scale mode button
   if (selectedMode === 'major') {
-      majorButton.classList.add('selected');
+    majorButton.classList.add('selected');
   } else if (selectedMode === 'minor') {
-      minorButton.classList.add('selected');
+    minorButton.classList.add('selected');
   }
 }
 
@@ -140,25 +152,25 @@ function outputChords() {
   let chords;
   
   if (selectedMode === 'major') {
-      chords = majorScales[scale];
+    chords = majorScales[scale];
   } else if (selectedMode === 'minor') {
-      chords = minorScales[scale];
+    chords = minorScales[scale];
   }
   
   const chordsOutput = document.getElementById('chordsOutput');
   const selectedScale = document.getElementById('selectedScale');
   
   if (chords) {
-      // Display the selected scale
-      selectedScale.textContent = `Selected Scale: ${selectedNote} ${selectedMode}`;
-      
-      // Display the chords in the selected scale with bold and blue styling for chord names
-      chordsOutput.innerHTML = chords.map((chord, index) => {
-          return `[${index + 1} <span style="font-weight: bold; color: blue;">${chord}</span>]`;
-      }).join(' ');
+    // Display the selected scale
+    selectedScale.textContent = `Selected Scale: ${selectedNote} ${selectedMode}`;
+    
+    // Display the chords in the selected scale with bold and blue styling for chord names
+    chordsOutput.innerHTML = chords.map((chord, index) => {
+      return `[${index + 1} <span style="font-weight: bold; color: blue;">${chord}</span>]`;
+    }).join(' ');
   } else {
-      // Display a message if no scale is available
-      selectedScale.textContent = `Selected Scale: N/A`;
-      chordsOutput.textContent = 'No scale available';
+    // Display a message if no scale is available
+    selectedScale.textContent = `Selected Scale: N/A`;
+    chordsOutput.textContent = 'No scale available';
   }
 }
