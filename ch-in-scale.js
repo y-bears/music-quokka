@@ -171,8 +171,8 @@ function outputChords() {
     
     // Display the chords in the selected scale with bold and blue styling for chord names
     chordsOutput.innerHTML = chords.map((chord, index) => {
-      return `[${index + 1}&nbsp;<span style="font-weight: bold; color: blue;">${chord}</span>]`;
-    }).join(' ');
+      return `<span style="display: inline-block;">[${index + 1}&nbsp;<span style="font-weight: bold; color: blue;">${chord}</span>]</span>`;
+    }).join('');
   } else {
     // Display a message if no scale is available
     selectedScale.textContent = `Selected Scale: N/A`;
