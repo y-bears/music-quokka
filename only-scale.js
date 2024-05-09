@@ -112,6 +112,11 @@ function selectRandom() {
   const modes = ['major', 'minor'];
   const randomMode = modes[Math.floor(Math.random() * modes.length)];
   const randomNote = notes[Math.floor(Math.random() * notes.length)];
+
+   // Clear highlighting from note buttons
+   selectedNote = null;
+   updateSelectedNoteButton(null);
+   
   selectNoteButton(null, randomNote);
   selectScale(randomMode);
 }
