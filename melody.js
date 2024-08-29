@@ -21,7 +21,7 @@ function choseStep(steps, weights) {
 }
 
 // steps and weights
-const steps = [1, 2, 3, 4, 5, 6, 7, 8, -1, -2, -3, -4, -5, -6, -7, -8, 0];
+const steps = ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '-1', '-2', '-3', '-4', '-5', '-6', '-7', '-8', '+0'];
 const weights = [100, 90, 85, 35, 35, 15, 15, 15, 100, 90, 85, 35, 35, 15, 15, 15, 40];
 //melody array
 
@@ -49,12 +49,13 @@ document.getElementById('go').onclick = function () {
 
     let result = melody.map((n, index) => {
         let colorStyle = index % 2 === 1 ? "color: blue;" : "color: ;";
-        // Add one extra space before positive numbers
-        let formattedNumber = n >= 0 ? `&nbsp;${n}` : n;
+        // Do not add extra space before positive numbers
+        let formattedNumber = n >= 0 ? `${n}` : n;
         return `<span style="${colorStyle}">&nbsp;${formattedNumber}</span>`;
-    }).join("&nbsp;");  // Add two spaces between numbers
+    }).join(" ");  // Add two spaces between numbers
 
     document.getElementById('result').innerHTML = result;
+
 }
 
 
