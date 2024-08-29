@@ -28,13 +28,13 @@ const weights = [100, 90, 85, 35, 35, 15, 15, 15, 100, 90, 85, 35, 35, 15, 15, 1
 //start
 document.getElementById('go').onclick = function () {
     let melody = [];
-    //first note  = note of a chord 1st 2nd 3rd
+    // First note = note of a chord (1st, 2nd, 3rd)
     const chordCheck = document.getElementById("chord");
     let length = document.getElementById('length').value;
     document.getElementById('firstNote').innerHTML = "";
     if (chordCheck.checked) {
         const firstNoteList = ["1st", "2nd", "3rd"];
-        firstNote = firstNoteList[Math.floor(Math.random() * ((firstNoteList.length - 1) - 0 + 1) + 0)];
+        firstNote = firstNoteList[Math.floor(Math.random() * firstNoteList.length)];
         length -= 1;
         document.getElementById('firstNote').innerHTML = firstNote;
     }
@@ -44,12 +44,15 @@ document.getElementById('go').onclick = function () {
     }
 
     let result = melody.map((n, index) => {
-        let colorStyle = index % 2 === 1 ? "color: yellow;" : "color: white;";
-        return `<span style="${colorStyle}">&nbsp;${n}</span>`;
-    }).join("&nbsp;");
+        let colorStyle = index % 2 === 1 ? "color: blue;" : "color: ;";
+        // Add one extra space before positive numbers
+        let formattedNumber = n >= 0 ? `&nbsp;${n}` : n;
+        return `<span style="${colorStyle}">&nbsp;${formattedNumber}</span>`;
+    }).join("&nbsp;");  // Add two spaces between numbers
 
     document.getElementById('result').innerHTML = result;
 }
+
 
 
 
