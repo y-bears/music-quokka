@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhythm</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    * {
+        font-size: x-large;
+        font-family: monospace;
+    }
+
+    .centered {
+        text-align: center;
+    }
+
+    input[type='number'] {
+        width: 2em;
+    }
+</style>
+
+<body>
+    <label for="">[Rhythm generator v1.1, nov 2023]</label><br><br>
+    <label for="">Bars</label>
+    <input type="number" id='length' step="1" value="1"><br>
+    <input type="checkbox" id="ch[0]" class="note" value="1">
+    <label for="">1</label><br>
+    <input type="checkbox" id="ch[1]" class="note" value="2">
+    <label for="">2</label><br>
+    <input type="checkbox" id="ch[2]" class="note" checked value="4">
+    <label for="">4</label><br>
+    <input type="checkbox" id="ch[3]" class="note" checked value="8">
+    <label for="">8</label><br>
+    <input type="checkbox" id="ch[4]" class="note" checked value="16">
+    <label for="">16</label><br>
+    <input type="checkbox" id="ch[5]" class="note" value="32">
+    <label for="">32</label><br><br>
+    <button class="button" id="go">Submit</button>
+    <label for="" id="result"></label>
+
+    <script src="rhythm-numbers.js"></script>
+</body>
+
+</html>
