@@ -33,11 +33,15 @@ document.getElementById('go').onclick = function () {
     let length = document.getElementById('length').value;
     document.getElementById('firstNote').innerHTML = "";
     if (chordCheck.checked) {
-        const firstNoteList = ["1st", "2nd", "3rd"];
+        let firstNoteList = ["1st", "2nd", "3rd"];
         firstNote = firstNoteList[Math.floor(Math.random() * firstNoteList.length)];
-        length -= 1;
-        document.getElementById('firstNote').innerHTML = firstNote;
     }
+    else {
+        let firstNoteList = [1, 2, 3, 4, 5, 6, 7];
+        firstNote = "scale step: " + firstNoteList[Math.floor(Math.random() * firstNoteList.length)];
+    }
+    length -= 1;
+    document.getElementById('firstNote').innerHTML = firstNote;
 
     for (let i = 0; i < length; i++) {
         melody[i] = choseStep(steps, weights);
