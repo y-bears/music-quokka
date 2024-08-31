@@ -5,4 +5,4 @@
 ### - [rhythm generator (numbers)](https://y-bears.github.io/music-quokka/rhythm-numbers.html)
 ### - [chords in scales](https://y-bears.github.io/music-quokka/ch-in-scale.html)
 
-1.09.2024 0:08
+1.09.2024 0:09
