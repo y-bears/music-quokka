@@ -1,80 +1,81 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Scale Selector</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="ch-in-scale.js"></script>
+  <link rel="stylesheet" href="styles-2.css">
   <style>
-    /* Centering the main content */
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: Arial, sans-serif;
-    }
-    /* Style for buttons */
-    button {
-      margin: 5px;
-      padding: 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+    .container {
       text-align: center;
-      min-width: 40px; /* Added width to make all buttons the same size */
+      padding: 20px;
     }
-    
-    /* Style for buttons containing "#" */
-    button.contains-hash {
-      background-color: #51b355; 
-    }
-    
-    button:hover {
-      background-color: #388e3c; /* Adjusted hover color for all buttons */
-    }
-    
-    /* Style for selected buttons */
-    button.selected {
-      background-color: #FF5722;
-    }
+
     /* Style for output */
     #chordsOutput {
       margin-top: 20px;
       font-family: monospace;
-      font-size: 1.5rem; /* Increased font size */
+      font-size: 1.5rem;
+      /* Increased font size */
       text-align: center;
     }
+
     /* Style for scale output */
     #selectedScale {
       margin-top: 10px;
       font-weight: bold;
-      font-size: 1.25rem; /* Larger font size */
+      font-size: 1.25rem;
+      /* Larger font size */
       text-align: center;
+    }
+
+    button {
+      margin: 5px;
+      min-width: 60px;
+      /* Added width to make all buttons the same size */
+    }
+
+    /* Style for buttons containing "#" */
+    button.contains-hash {
+      background-color: #735840;
+    }
+
+    /* Style for selected buttons */
+    button.selected {
+      background-color: #D9D9D9;
+      border: 5px double #262626;
+      font-weight: bold;
+      text-decoration: underline;
+      /* Highlight border for selected button */
     }
   </style>
 </head>
+
 <body onload="initialize()">
-  <h1>Scale Selector</h1>
-  
-  <!-- Note selection buttons -->
-  <div id="noteButtons"></div>
-  
-  <!-- Scale mode selection buttons -->
-  <div>
-    <button id="majorButton" onclick="selectScale('major')">Major</button>
-    <button id="minorButton" onclick="selectScale('minor')">Minor</button>
+  <div class="container">
+    <h1>Scale Selector</h1>
+
+    <!-- Note selection buttons -->
+    <div id="noteButtons"></div>
+    <hr>
+    <!-- Scale mode selection buttons -->
+    <div>
+      <button id="majorButton" class="button" onclick="selectScale('major')">Major</button>
+      <button id="minorButton" class="button" onclick="selectScale('minor')">Minor</button>
+    </div>
+
+    <!-- Random selection button -->
+    <div>
+      <button class="button" onclick="selectRandom()">Random</button>
+    </div>
+
+    <!-- Display selected scale -->
+    <div id="selectedScale"></div>
+
+    <!-- Output for chords -->
+    <div id="chordsOutput"></div>
   </div>
-  
-  <!-- Random selection button -->
-  <div>
-    <button onclick="selectRandom()">Random</button>
-  </div>
-  
-  <!-- Display selected scale -->
-  <div id="selectedScale"></div>
-  
-  <!-- Output for chords -->
-  <div id="chordsOutput"></div>
 </body>
+
 </html>

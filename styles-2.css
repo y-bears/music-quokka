@@ -1,0 +1,130 @@
+/* Base styles */
+body {
+    background-color: #262626;
+    color: #D9D9D9;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Element Styles */
+label {
+    /*font-size: ; */
+    color: #D9B384;
+}
+
+input[type="number"] {
+    background-color: #735840;
+    color: #D9D9D9;
+    border: 1px solid #D9B384;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+input[type="checkbox"] {
+    accent-color: #D9B384;
+}
+
+select {
+    background-color: #735840;
+    color: #D9D9D9;
+    border: 1px solid #D9B384;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 10px 0;
+
+}
+
+button {
+    background-color: #D9B384;
+    color: #262626;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #A6A6A6;
+}
+
+
+#firstNote,
+#result {
+    font-size: 1.2em;
+    color: #c1c1c1;
+}
+
+#result span {
+    margin-right: 10px;
+}
+
+/* Alternate color for melody */
+.alternate-color {
+    color: #bc9069;
+}
+
+/* Scale checkboxes */
+input[type="checkbox"] {
+    transform: scale(1.2);
+    /* Scale  */
+    -ms-transform: scale(1.2);
+    /* For IE 9 */
+    -webkit-transform: scale(1.2);
+    /* For Safari */
+}
+
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    input[type="number"],
+    button.button {
+
+        padding: 10px;
+    }
+
+
+}
+
+/* Media query for extra small screens */
+@media (max-width: 425px) {
+    body {
+        margin: 3px;
+        /* Remove margin when display width is less than 425px */
+    }
+
+    .container {
+        padding: 5px;
+    }
+
+
+
+    button.button {
+        padding: 8px;
+        width: 100%;
+    }
+}
+
+/* Hidden elements */
+#infoText {
+    display: none;
+    /* Hide this element on small screens */
+}

@@ -6,42 +6,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rhythm</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-2.css">
 </head>
 <style>
-    * {
-        font-size: x-large;
-        font-family: monospace;
-    }
-
-    .centered {
-        text-align: center;
-    }
-
     input[type='number'] {
         width: 2em;
+    }
+
+    /* Ensures that each checkbox-label pair is displayed on a new line */
+    input[type="checkbox"] {
+        margin-bottom: 5px;
+
+    }
+
+    /* Ensures that each checkbox and label pair is on its own line */
+    input[type="checkbox"]+label {
+        display: inline-block;
+        margin-right: 10px;
+        /* Space between checkboxes and labels */
+    }
+
+    #mono {
+        font-family: monospace;
+        font-size: 1.2em;
+        /* Monospace font */
     }
 </style>
 
 <body>
-    <label for="">[Rhythm generator v1.1, nov 2023]</label><br><br>
-    <label for="">Bars</label>
-    <input type="number" id='length' step="1" value="1"><br>
-    <input type="checkbox" id="ch[0]" class="note" value="1">
-    <label for="">1</label><br>
-    <input type="checkbox" id="ch[1]" class="note" value="2">
-    <label for="">2</label><br>
-    <input type="checkbox" id="ch[2]" class="note" checked value="4">
-    <label for="">4</label><br>
-    <input type="checkbox" id="ch[3]" class="note" checked value="8">
-    <label for="">8</label><br>
-    <input type="checkbox" id="ch[4]" class="note" checked value="16">
-    <label for="">16</label><br>
-    <input type="checkbox" id="ch[5]" class="note" value="32">
-    <label for="">32</label><br><br>
-    <button class="button" id="go">Submit</button>
-    <label for="" id="result"></label>
-
+    <div class="container">
+        <label for="">[Rhythm generator v1.1, nov 2023]</label><br><br>
+        <label for="">Bars</label>
+        <select id="length">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="8">8</option>
+        </select><br>
+        <input type="checkbox" id="ch[0]" class="note" value="1">
+        <label id="mono" for="">&nbsp;1</label><br>
+        <input type="checkbox" id="ch[1]" class="note" value="2">
+        <label id="mono" for="">&nbsp;2</label><br>
+        <input type="checkbox" id="ch[2]" class="note" checked value=" 4">
+        <label id="mono" for="">&nbsp;4</label><br>
+        <input type="checkbox" id="ch[3]" class="note" checked value="8">
+        <label id="mono" for="">&nbsp;8</label><br>
+        <input type="checkbox" id="ch[4]" class="note" value="16">
+        <label id="mono" for="">16</label><br>
+        <input type="checkbox" id="ch[5]" class="note" value="32">
+        <label id="mono" for="">32</label><br>
+        <button class="button" id="go">Submit</button><br>
+        <label for="" id="result"></label>
+    </div>
     <script src="rhythm-numbers.js"></script>
 </body>
 

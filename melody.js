@@ -41,17 +41,17 @@ document.getElementById('go').onclick = function () {
         firstNote = "scale step: " + firstNoteList[Math.floor(Math.random() * firstNoteList.length)];
     }
     length -= 1;
-    document.getElementById('firstNote').innerHTML = firstNote;
+    document.getElementById('firstNote').innerHTML = firstNote + "&nbsp;";
 
     for (let i = 0; i < length; i++) {
         melody[i] = choseStep(steps, weights);
     }
 
     let result = melody.map((n, index) => {
-        let colorStyle = index % 2 === 1 ? "color: blue;" : "color: ;";
+        let colorStyle = index % 2 === 0 ? "alternate-color" : "";
         // Do not add extra space before positive numbers
         let formattedNumber = n >= 0 ? `${n}` : n;
-        return `<span style="${colorStyle}">&nbsp;${formattedNumber}</span>`;
+        return `<span class="${colorStyle}">&nbsp;${formattedNumber}</span>`;
     }).join(" ");  // Add two spaces between numbers
 
     document.getElementById('result').innerHTML = result;

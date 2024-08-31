@@ -58,51 +58,39 @@ let selectedMode = 'minor';
 // Initialize function to set up the UI
 function initialize() {
   const noteButtons = document.getElementById('noteButtons');
-  
+
   // Create buttons for each note
   notes.forEach((note) => {
     const button = document.createElement('button');
     button.textContent = note;
     button.onclick = () => selectNoteButton(button, note);
     noteButtons.appendChild(button);
-    
+
     // Add class to buttons containing "#"
     if (note.includes('#')) {
       button.classList.add('contains-hash');
     }
-    
+
     // Highlight the button corresponding to the selected note
     if (note === selectedNote) {
       selectNoteButton(button, selectedNote);
     }
-    
+
   });
-  
+
   // Set the default selection
   selectScale('minor');
 }
 
-// Function to handle note selection
-function selectNoteButton(button, note) {
-  // Update the selected note
-  selectedNote = note;
-  
-  // Update button styles if a button reference is provided
-  if (button) {
-    updateSelectedNoteButton(button);
-  }
-  
-  // Output chords
-  outputChords();
-}
+
 
 // Function to handle scale mode selection
 function selectScale(mode) {
   selectedMode = mode;
-  
+
   // Update button styles
   updateSelectedScaleButton();
-  
+
   // Output chords
   outputChords();
 }
@@ -113,23 +101,47 @@ function selectRandom() {
   const randomMode = modes[Math.floor(Math.random() * modes.length)];
   const randomNote = notes[Math.floor(Math.random() * notes.length)];
 
-   // Clear highlighting from note buttons
-   selectedNote = null;
-   updateSelectedNoteButton(null);
-   
-  selectNoteButton(null, randomNote);
+  // Update selectedNote with the new random note
+  selectedNote = randomNote;
+
+  // Clear highlighting from all note buttons
+  updateSelectedNoteButton();
+
+  // Find and select the button for the random note
+  const noteButtons = document.querySelectorAll('#noteButtons button');
+  noteButtons.forEach(button => {
+    if (button.textContent === randomNote) {
+      selectNoteButton(button, randomNote);
+    }
+  });
+
+  // Update scale
   selectScale(randomMode);
 }
 
+// Function to handle note selection
+function selectNoteButton(button, note) {
+  // Update the selected note
+  selectedNote = note;
+
+  // Update button styles if a button reference is provided
+  if (button) {
+    updateSelectedNoteButton(button);
+  }
+
+  // Output chords
+  outputChords();
+}
+
 // Function to update button styles for the selected note
-function updateSelectedNoteButton(button) {
+function updateSelectedNoteButton(selectedButton = null) {
   // Remove the 'selected' class from all note buttons
   const buttons = document.querySelectorAll('#noteButtons button');
   buttons.forEach(btn => btn.classList.remove('selected'));
-  
-  // Add the 'selected' class to the chosen note button
-  if (button) {
-    button.classList.add('selected');
+
+  // Add the 'selected' class to the chosen note button if specified
+  if (selectedButton) {
+    selectedButton.classList.add('selected');
   }
 }
 
@@ -137,11 +149,11 @@ function updateSelectedNoteButton(button) {
 function updateSelectedScaleButton() {
   const majorButton = document.getElementById('majorButton');
   const minorButton = document.getElementById('minorButton');
-  
+
   // Remove the 'selected' class from both buttons
   majorButton.classList.remove('selected');
   minorButton.classList.remove('selected');
-  
+
   // Add the 'selected' class to the chosen scale mode button
   if (selectedMode === 'major') {
     majorButton.classList.add('selected');
@@ -151,27 +163,26 @@ function updateSelectedScaleButton() {
 }
 
 // Function to output the selected chords and scale
-// Function to output the selected chords and scale
 function outputChords() {
   const scale = `${selectedNote} ${selectedMode}`;
   let chords;
-  
+
   if (selectedMode === 'major') {
     chords = majorScales[scale];
   } else if (selectedMode === 'minor') {
     chords = minorScales[scale];
   }
-  
+
   const chordsOutput = document.getElementById('chordsOutput');
   const selectedScale = document.getElementById('selectedScale');
-  
+
   if (chords) {
     // Display the selected scale
     selectedScale.textContent = `Selected Scale: ${selectedNote} ${selectedMode}`;
-    
+
     // Display the chords in the selected scale with bold and blue styling for chord names
     chordsOutput.innerHTML = chords.map((chord, index) => {
-      return `<span style="display: inline-block;">[${index + 1}&nbsp;<span style="font-weight: bold; color: blue;">${chord}</span>]</span> `;
+      return `<span style="display: inline-block;">[${index + 1}&nbsp;<span style="font-weight: bold;" class="alternate-color">${chord}</span>]</span> `;
     }).join('');
   } else {
     // Display a message if no scale is available
