@@ -1,0 +1,13 @@
+--- --- @import "{{ site.theme }}";
+
+a {
+    color: #01192b;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+body {
+    font: 14px / 1.5 monospace, "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
