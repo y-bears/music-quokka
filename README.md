@@ -4,4 +4,4 @@
 ### - [rhythm generator (numbers)](https://y-bears.github.io/music-quokka/rhythm-numbers.html)
 ### - [chords in scales](https://y-bears.github.io/music-quokka/ch-in-scale.html)
 
-29.08.2024 14:53
+1.09.2024
