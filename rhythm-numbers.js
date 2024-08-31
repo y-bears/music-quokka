@@ -35,7 +35,7 @@ function r1(len) {
     let b = Math.abs(arrResult.length / 4) - 1;
     console.log("abs", b);
     for (let i = 0; i < b; i++) {
-        arrResult.splice(a, 0, "|");
+        arrResult.splice(a, 0, "&nbsp;");
         a += 5;
         console.log("result splicing", arrResult);
     }
