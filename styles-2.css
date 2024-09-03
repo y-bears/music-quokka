@@ -7,14 +7,17 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    gap: 10px;
     justify-content: center;
-    align-items: flex-start;
     min-height: 100vh;
 }
 
 .container {
     text-align: center;
     padding: 20px;
+    border: 2px solid #D9D9D9;
+    /* Black border with 2px width */
+
 }
 
 /* Element Styles */
@@ -51,19 +54,18 @@ button {
     color: #262626;
     border: none;
     border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
+    font-size: 1em;
+    padding: 5px 20px;
     cursor: pointer;
     transition: background-color 0.3s;
     margin: 10px;
+    min-width: 90px;
 }
 
 button:hover {
     background-color: #A6A6A6;
 }
 
-
-#firstNote,
 #result {
     font-size: 1.2em;
     color: #c1c1c1;
@@ -73,9 +75,15 @@ button:hover {
     margin-right: 10px;
 }
 
-/* Alternate color for melody */
+/* Alternate color  */
 .alternate-color {
     color: #bc9069;
+}
+
+/* Alternate color-2  */
+.alternate-color-2 {
+    color: #9494ff;
+    font-weight: bold;
 }
 
 /* Scale checkboxes */
@@ -107,19 +115,15 @@ input[type="checkbox"] {
 /* Media query for extra small screens */
 @media (max-width: 425px) {
     body {
-        margin: 3px;
-        /* Remove margin when display width is less than 425px */
+        display: block;
     }
-
-    .container {
-        padding: 5px;
-    }
-
-
 
     button.button {
-        padding: 8px;
-        width: 100%;
+        width: 80%;
+    }
+
+    button.no-resize-button {
+        width: unset;
     }
 }
 

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Generators</title>
+    <link rel="stylesheet" href="styles-2.css">
+    <style>
+        .result1 {
+            text-align: left;
+            font-family: monospace;
+            font-size: 1.2em;
+        }
+
+        #num {
+            width: 3em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3 class="header">[BPM Generator]</h3>
+        <label for="bpm1">min</label>
+        <input type="number" class="bpm" id="bpm1" value="40" step="10" min="40" max="180">
+        <label for="bpm2">max</label>
+        <input type="number" class="bpm" id="bpm2" value="160" step="10" min="40" max="300"><br>
+        <button id="bpm-go" class="button">Go!</button><br>
+        <label class="result1" for="" id="result-bpm"></label><br>
+        <script src="bpm.js"></script>
+
+        <h3 class="header">[Rhythm generator]</h3>
+        <label for="rhLength">Bars</label>
+        <select id="rhLength">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="8">8</option>
+        </select><br>
+        <div class="container" style="font-family: monospace;">
+            <input type="checkbox" id="ch0" class="note" value="1">
+            <label for="ch0">1&nbsp;</label><br>
+            <input type="checkbox" id="ch1" class="note" value="2">
+            <label for="ch1">2&nbsp;</label><br>
+            <input type="checkbox" id="ch2" class="note" checked value="4">
+            <label for="ch2">4&nbsp;</label><br>
+            <input type="checkbox" id="ch3" class="note" checked value="8">
+            <label for="ch3">8&nbsp;</label><br>
+            <input type="checkbox" id="ch4" class="note" value="16">
+            <label for="ch4">16</label><br>
+            <input type="checkbox" id="ch5" class="note" value="32">
+            <label for="ch5">32</label><br>
+        </div>
+        <button class="button" id="rhythm-go">Submit</button><br>
+        <label for="" id="result-rhythm"></label>
+        <script src="rhythm-numbers.js"></script>
+    </div>
+
+    <div class="container">
+        <h3>[Melody generator]</h3>
+        <label for="melodyLength">Length</label>
+        <input type="number" id="melodyLength" step="1" value="8" style="width: 60px">
+        <input type="checkbox" id="chord" class="note" checked> use chord note
+        <br>
+        <button class="button" id="melody-go">Go!</button><br>
+        <label id="firstNote"></label>
+        <label id="result-melody"></label>
+        <script src="melody.js"></script>
+    </div>
+</body>
+
+</html>

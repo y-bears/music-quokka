@@ -1,4 +1,4 @@
-var scales = {
+var scaleNotes = {
     'C major': ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'],
     'C# major': ['C#', 'D#m', 'E#m', 'F#', 'G#', 'A#m', 'B#dim'],
     'Db major': ['Db', 'Ebm', 'Fm', 'Gb', 'Ab', 'Bbm', 'Cdim'],
@@ -52,10 +52,10 @@ function chord(selectedScale) {
         console.log(ch_alter2);
         while (ch_alter2 == ch || ch_alter2 == ch_alter) {
             ch_alter2 = Math.floor(Math.random() * (6 - 1 + 1) + 1);
-            }
+        }
         console.log("ch alter 2", ch_alter2);
     } else {
-    //removing 2 from minor
+        //removing 2 from minor
         let useTwo = Math.random() < 0.05; // Adjust the probability as needed 5%
         console.log("usetwo = ", useTwo);
         if (useTwo) {
@@ -75,31 +75,31 @@ function chord(selectedScale) {
         }
         console.log("ch alter = ", ch_alter);
         ch_alter2 = Math.floor(Math.random() * (7 - 1 + 1) + 1);
-        
+
         while (ch_alter2 == ch || ch_alter2 == ch_alter || ch_alter2 == 2) {
             ch_alter2 = Math.floor(Math.random() * (7 - 1 + 1) + 1);
-            
+
         }
         console.log("ch alter 2 = ", ch_alter2);
     };
 
     let seventh = Math.floor(Math.random() * (100 - 0 + 1) + 1);
-    if (seventh < 100) {seventh = '\u00A0' + seventh};
-    if (seventh < 10) {seventh = '\u00A0' + seventh};
+    if (seventh < 100) { seventh = '\u00A0' + seventh };
+    if (seventh < 10) { seventh = '\u00A0' + seventh };
     let additional = Math.floor(Math.random() * (100 - 0 + 1) + 1);
-    if (additional < 100) {additional = '\u00A0' + additional};
-    if (additional < 10) {additional = '\u00A0' + additional};
+    if (additional < 100) { additional = '\u00A0' + additional };
+    if (additional < 10) { additional = '\u00A0' + additional };
     let additional2 = Math.floor(Math.random() * (100 - 0 + 1) + 1);
-    if (additional2 < 100) {additional2 = '\u00A0' + additional2};
-    if (additional2 < 10) {additional2 = '\u00A0' + additional2};
+    if (additional2 < 100) { additional2 = '\u00A0' + additional2 };
+    if (additional2 < 10) { additional2 = '\u00A0' + additional2 };
     return { ch, ch_alter, ch_alter2, seventh, additional, additional2 };
 }
 
 function notesAndInversion() {
-    const inv_list = ['root', '3rd', '5th'];
+    const inv_list = ['root', '1st inversion', '2nd inversion'];
     let inv = inv_list[Math.floor(Math.random() * (2 - 0 + 1) + 0)];
     let notes_c = Math.floor(Math.random() * (6 - 1 + 1) + 1);
-    return {inv, notes_c};
+    return { inv, notes_c };
 }
 
 function getChords(ch_num, selectedScale) {
@@ -107,19 +107,27 @@ function getChords(ch_num, selectedScale) {
     let resultElement = document.getElementById('resultCh');
     resultElement.innerHTML = '';
     let { inv, notes_c } = notesAndInversion();
-    let scale = scales[selectedScale];
+    let scale = scaleNotes[selectedScale];
     console.log("scale = ", scale)
-    let resultHTML = `inversion = ${inv}, notes = ${notes_c}<br><br>`; // Build the HTML string outside the loop
+    let resultHTML = `${inv}, notes=${notes_c}<br><br>`; // Build the HTML string outside the loop
 
     // Find the maximum chord name length in the current scale
     const maxChordLength = 5; // Set the desired length (5 symbols)
 
     for (let i = 0; i < ch_num; i++) {
         let { ch, ch_alter, ch_alter2, seventh, additional, additional2 } = chord(selectedScale);
-       
+
         // Modify chord names to ensure a length of 5 symbols
         // Update the chordHTML line in your code
-        let chordHTML = `[${ch}][ <span class="white-bold">${scale[ch - 1].padEnd(maxChordLength, '\u00A0')}</span> ] %7\u00A0=${seventh}, (alt\u00A0${ch_alter}\u00A0${scale[ch_alter - 1].padEnd(maxChordLength, '\u00A0')}\u00A0${ch_alter2}\u00A0${scale[ch_alter2 - 1].padEnd(maxChordLength, '\u00A0')}), (add\u00A0${additional},\u00A0${additional2})`;
+        let chordHTML = `${ch} <span class="alternate-color-2">${scale[ch - 1].padEnd(maxChordLength, '\u00A0')}</span> <span style="font-size: 0.7em;">alt\u00A0${ch_alter}${scale[ch_alter - 1].padEnd(maxChordLength, '\u00A0')}\u00A0${ch_alter2}${scale[ch_alter2 - 1].padEnd(maxChordLength, '\u00A0')}</span>`;
+        // color chords if seventh goes from 1 to 15
+        if (seventh >= 1 && seventh <= 15) {
+            chordHTML = `${ch} <span style="font-weight: bold;" class="alternate-color">${scale[ch - 1].padEnd(maxChordLength, '\u00A0')}</span> <span style="font-size: 0.7em;">alt\u00A0${ch_alter}${scale[ch_alter - 1].padEnd(maxChordLength, '\u00A0')}\u00A0${ch_alter2}${scale[ch_alter2 - 1].padEnd(maxChordLength, '\u00A0')}</span>`;
+        }
+
+        /*    before
+        let chordHTML = `[${ch}] [<span class="alternate-color-2">${scale[ch - 1].padEnd(maxChordLength, '\u00A0')}</span>] (alt\u00A0${ch_alter}\u00A0${scale[ch_alter - 1].padEnd(maxChordLength, '\u00A0')}\u00A0${ch_alter2}\u00A0${scale[ch_alter2 - 1].padEnd(maxChordLength, '\u00A0')}), (add\u00A0${additional},\u00A0${additional2})`;
+        */
 
         // Append the chord HTML to the resultHTML string
         resultHTML += chordHTML + '<br>';
@@ -131,11 +139,11 @@ function getChords(ch_num, selectedScale) {
     let selectedKeyChords = '';
 
     for (let i = 0; i < scale.length; i++) {
-      selectedKeyChords += `[${i + 1} <span style="font-weight: bold; color: purple;">${scale[i]}</span>] `;
+        selectedKeyChords += `${i + 1}<span style="font-weight: bold;" class="alternate-color">${scale[i]}</span> `;
     }
 
     // Append the selected key chords to the resultHTML string
-    resultHTML +='<br><br>' + selectedKeyChords;
+    resultHTML += '<br><br>' + selectedKeyChords;
 
     // Set the resultHTML string to the result element once, outside the loop
     resultElement.innerHTML = resultHTML;
@@ -181,7 +189,7 @@ document.getElementById('numButton').onclick = () => {
     let ch_num = document.getElementById('num').value;
     let selectedScale = document.getElementById('scaleSelect').value;
     getChords(ch_num, selectedScale);
-    
+
 }
 
 document.getElementById('rh').onclick = function () {
@@ -195,7 +203,7 @@ document.getElementById('rh').onclick = function () {
     document.getElementById('num').value = ch_num;
     let selectedScale = document.getElementById('scaleSelect').value;
     getChords(ch_num, selectedScale);
-    
+
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -204,12 +212,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var infoButton = document.getElementById('infoButton');
     infoButton.addEventListener('click', function () {
-      if (infoText.style.display === 'none') {
-        infoText.style.display = 'block';
-        infoButton.textContent = 'Hide Info';
-      } else {
-        infoText.style.display = 'none';
-        infoButton.textContent = 'Show Info';
-      }
+        if (infoText.style.display === 'none') {
+            infoText.style.display = 'block';
+            infoButton.textContent = 'Hide Info';
+        } else {
+            infoText.style.display = 'none';
+            infoButton.textContent = 'Show Info';
+        }
     });
-  });
+});

@@ -15,7 +15,6 @@ function choseStep(steps, weights) {
         if (randomNum < currentWeight) {
             console.log("chosen step", steps[i])
             return steps[i];
-
         }
     }
 }
@@ -23,27 +22,26 @@ function choseStep(steps, weights) {
 // steps and weights
 const steps = ['+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '-1', '-2', '-3', '-4', '-5', '-6', '-7', '-8', '+0'];
 const weights = [100, 90, 85, 35, 35, 15, 15, 15, 100, 90, 85, 35, 35, 15, 15, 15, 40];
-//melody array
 
 //start
-document.getElementById('go').onclick = function () {
+document.getElementById('melody-go').onclick = function () {
     let melody = [];
     // First note = note of a chord (1st, 2nd, 3rd)
     const chordCheck = document.getElementById("chord");
-    let length = document.getElementById('length').value;
+    let melodyLength = document.getElementById('melodyLength').value;
     document.getElementById('firstNote').innerHTML = "";
+    let firstNote;
     if (chordCheck.checked) {
         let firstNoteList = ["1st", "2nd", "3rd"];
         firstNote = firstNoteList[Math.floor(Math.random() * firstNoteList.length)];
-    }
-    else {
+    } else {
         let firstNoteList = [1, 2, 3, 4, 5, 6, 7];
         firstNote = "scale step: " + firstNoteList[Math.floor(Math.random() * firstNoteList.length)];
     }
-    length -= 1;
+    melodyLength -= 1;
     document.getElementById('firstNote').innerHTML = firstNote + "&nbsp;";
 
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < melodyLength; i++) {
         melody[i] = choseStep(steps, weights);
     }
 
@@ -54,14 +52,5 @@ document.getElementById('go').onclick = function () {
         return `<span class="${colorStyle}">&nbsp;${formattedNumber}</span>`;
     }).join(" ");  // Add two spaces between numbers
 
-    document.getElementById('result').innerHTML = result;
-
+    document.getElementById('result-melody').innerHTML = result;
 }
-
-
-
-
-
-
-
-
