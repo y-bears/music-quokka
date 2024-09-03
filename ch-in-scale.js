@@ -182,7 +182,7 @@ function outputChords() {
 
     // Display the chords in the selected scale with bold and blue styling for chord names
     chordsOutput.innerHTML = chords.map((chord, index) => {
-      return `<span style="display: inline-block;">[${index + 1}&nbsp;<span style="font-weight: bold;" class="alternate-color">${chord}</span>]</span> `;
+      return `<span style="display: inline-block;">[${index + 1}]&nbsp;<span style="font-weight: bold;" class="alternate-color">${chord}</span></span> `;
     }).join('');
   } else {
     // Display a message if no scale is available

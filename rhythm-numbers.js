@@ -1,4 +1,4 @@
-// array from checked
+// Array from checked
 let arr1 = [];
 document.getElementById('rhythm-go').onclick = function () {
     arr1 = [];
@@ -17,8 +17,8 @@ document.getElementById('rhythm-go').onclick = function () {
 }
 
 function r1(len) {
-    let len1 = 0; //count length
-    let arrResult = []; //print result
+    let len1 = 0; // Count length
+    let arrResult = []; // Store result
     while (len1 < len) {
         let x = Math.floor(Math.random() * arr1.length);
         console.log('random', x);
@@ -31,17 +31,15 @@ function r1(len) {
             len1 -= 1 / arr1[x];
         }
     }
-    //create spacers
-    let a = 4;
-    //how many spacers
-    let b = Math.abs(arrResult.length / 4) - 1;
-    console.log("abs", b);
-    for (let i = 0; i < b; i++) {
-        arrResult.splice(a, 0, "&nbsp;");
-        a += 5;
-        console.log("result splicing", arrResult);
-    }
-    let c = arrResult.join(" ");
 
-    return c;
+    // Process results: Add space before single digits and add class to every second number
+    let formattedResult = arrResult.map((num, index) => {
+        let formattedNum = num < 10 ? `&nbsp;${num}` : num;  // Add space before single-digit numbers
+        // Add class to every second number based on index (1-based index for class)
+        return (index + 1) % 2 === 0
+            ? `<span class="alternate-color">${formattedNum}</span>`
+            : formattedNum;  // Keep other numbers as they are
+    }).join(" ");  // Join the numbers with a space
+
+    return formattedResult;
 }

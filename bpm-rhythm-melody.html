@@ -8,12 +8,6 @@
     <title>Music Generators</title>
     <link rel="stylesheet" href="styles-2.css">
     <style>
-        .result1 {
-            text-align: left;
-            font-family: monospace;
-            font-size: 1.2em;
-        }
-
         #num {
             width: 3em;
         }
@@ -39,7 +33,7 @@
             <option value="4">4</option>
             <option value="8">8</option>
         </select><br>
-        <div class="container" style="font-family: monospace;">
+        <div style="font-family: monospace;">
             <input type="checkbox" id="ch0" class="note" value="1">
             <label for="ch0">1&nbsp;</label><br>
             <input type="checkbox" id="ch1" class="note" value="2">
@@ -53,8 +47,10 @@
             <input type="checkbox" id="ch5" class="note" value="32">
             <label for="ch5">32</label><br>
         </div>
-        <button class="button" id="rhythm-go">Submit</button><br>
-        <label for="" id="result-rhythm"></label>
+        <button class="button" id="rhythm-go">Go!</button><br>
+        <div class="left-align">
+            <label for="" id="result-rhythm" class="result1"></label>
+        </div>
         <script src="rhythm-numbers.js"></script>
     </div>
 
@@ -65,8 +61,11 @@
         <input type="checkbox" id="chord" class="note" checked> use chord note
         <br>
         <button class="button" id="melody-go">Go!</button><br>
-        <label id="firstNote"></label>
-        <label id="result-melody"></label>
+
+        <div class="left-align">
+            <label id="firstNote" class="result1"></label><br>
+            <label id="result-melody" class="result1"></label>
+        </div>
         <script src="melody.js"></script>
     </div>
 </body>
