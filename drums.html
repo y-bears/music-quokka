@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drums</title>
+    <link rel="stylesheet" href="styles-2.css">
+</head>
+<style>
+    .drum-density {
+        /*border-radius: 2px;
+        border-style: double;*/
+        text-align: left;
+        width: 11em;
+        padding-left: 25%;
+        padding-top: 0.5em;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <H3>[Drums generator]</h3><br>
+        <label for="kick_btn" id="">Steps: </label>
+        <input type="radio" id="value8" name="drumSteps" value="8" checked> 8
+        <input type="radio" id="value16" name="drumSteps" value="16"> 16<br><br>
+
+        <label>Density:</label><br>
+        <div class="drum-density">
+            <input type="radio" id="hi-density" name="drum-density" value="hi-density">
+            High<br>
+            <input type="radio" id="med-density" name="drum-density" value="med-density" checked>
+            Medium<br>
+            <input type="radio" id="low-density" name="drum-density" value="low-density">
+            Low<br>
+            <input type="radio" id="rand-density" name="drum-density" value="rand-density">
+            Full random<br>
+        </div>
+
+        <button id="drums_btn">All drums</button><br>
+        <button id="hi-hat_btn">Hi-hat</button>
+        <button id="snare_btn">Snare</button>
+        <button id="kick_btn">Kick</button><br>
+        <br>
+        <label class="result1" id="hi-hat-out"></label><br>
+        <label class="result1" id="snare-out"></label><br>
+        <label class="result1" id="kick_out"></label><br>
+    </div>
+    <script src="drums.js"></script>
+</body>
+
+</html>

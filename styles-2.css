@@ -33,10 +33,26 @@ input[type="number"] {
     border-radius: 4px;
     padding: 5px;
     margin: 5px 0;
+    width: 3em;
 }
 
 input[type="checkbox"] {
     accent-color: #D9B384;
+    transform: scale(1.2);
+    /* Scale  */
+    -ms-transform: scale(1.2);
+    /* For IE 9 */
+    -webkit-transform: scale(1.2);
+    /* For Safari */
+}
+
+input[type="radio"] {
+    transform: scale(1.2);
+    /* Scale  */
+    -ms-transform: scale(1.2);
+    /* For IE 9 */
+    -webkit-transform: scale(1.2);
+    /* For Safari */
 }
 
 select {
@@ -95,17 +111,6 @@ button:hover {
     color: #9494ff;
     font-weight: bold;
 }
-
-/* Scale checkboxes */
-input[type="checkbox"] {
-    transform: scale(1.2);
-    /* Scale  */
-    -ms-transform: scale(1.2);
-    /* For IE 9 */
-    -webkit-transform: scale(1.2);
-    /* For Safari */
-}
-
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {

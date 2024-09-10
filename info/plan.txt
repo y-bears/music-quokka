@@ -1,4 +1,3 @@
-scale generator + chords
-bpm + rhythm + melody
-
-change body color to darker, and remove color from label input etc.
+drums
+add file drums and js
+add main page
