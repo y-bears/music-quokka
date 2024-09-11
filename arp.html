@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arpeggio gen v1</title>
+    <link rel="stylesheet" href="styles-2.css">
+</head>
+
+<body>
+    <div class="container">
+        <label>[ Arpeggio generator, 2 octaves ]</label><br><br>
+        <label for="notes-chord">How many notes in chord </label><br>
+        <!-- Use a dropdown for selecting the number of notes in the chord -->
+        <select id="notes-chord" name="n_c">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select><br>
+
+
+        <label for="arp-length">Arpeggio length </label><br>
+        <!-- Use a dropdown for selecting the arpeggio length -->
+        <select id="arp-length" name="arp_len_u">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4" selected>4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+        <br>
+
+        <button id='aeu'>Go!</button>
+        <br>
+        <button id='al'>al</button>
+        <button id='al_alt'>alt</button>
+        <button id='new'>Random/Clear</button><br>
+        <div style="padding-bottom: 15px;">
+            <label id="res-all"></label>
+        </div>
+        <div class="left-align result1">
+            <label id="result-d" class="result1" style="font-size: 1em;"></label>
+        </div>
+
+
+    </div>
+    <script src="arp.js"></script>
+</body>
+
+</html>

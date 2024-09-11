@@ -20,12 +20,6 @@ body {
     width: 358px;
 }
 
-/* Element Styles */
-label {
-    /*font-size: ; */
-    /*color: #D9D9D9;*/
-}
-
 input[type="number"] {
     background-color: #735840;
     color: inherit;
