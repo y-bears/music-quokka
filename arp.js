@@ -1,7 +1,7 @@
 function r_arp(x) {
     // Use only 0 and 1 octaves with weights
-    const oc = [0, 0, 0, 0, 0, 1];
-    let octave = oc[Math.floor(Math.random() * (5 - 0 + 1) + 0)];
+    const oc = [0, 0, 0, 0, 1];
+    let octave = oc[Math.floor(Math.random() * oc.length)];
     let velocity = (Math.floor(Math.random() * (12 - 5 + 1) + 5)) * 10; // 50 - 120
     const t1 = [8, 4];
     let timing = t1[Math.floor(Math.random() * (1 - 0 + 1) + 0)];
