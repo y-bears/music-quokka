@@ -119,14 +119,14 @@ function getChords(ch_num, selectedScale) {
 
         // Modify chord names to ensure a length of 5 symbols
         // Update the chordHTML line in your code
-        let chordHTML = `${ch} <span class="alternate-color-2">${scale[ch - 1].padEnd(maxChordLength, '\u00A0')}</span> <span style="font-size: 0.7em;">alt\u00A0${ch_alter}${scale[ch_alter - 1].padEnd(maxChordLength, '\u00A0')}\u00A0${ch_alter2}${scale[ch_alter2 - 1].padEnd(maxChordLength, '\u00A0')}</span>`;
-        // color chords if seventh goes from 1 to 15
-        if (seventh >= 1 && seventh <= 15) {
-            chordHTML = `${ch} <span style="font-weight: bold;" class="alternate-color">${scale[ch - 1].padEnd(maxChordLength, '\u00A0')}</span> <span style="font-size: 0.7em;">alt\u00A0${ch_alter}${scale[ch_alter - 1].padEnd(maxChordLength, '\u00A0')}\u00A0${ch_alter2}${scale[ch_alter2 - 1].padEnd(maxChordLength, '\u00A0')}</span>`;
+        let chordHTML = `${ch} <span class="alternate-color-2">${scale[ch - 1].padEnd(maxChordLength, '\u00A0')}</span> <span style="font-size: 0.7em;">\u00A0(${ch_alter}${scale[ch_alter - 1].padEnd(maxChordLength, '\u00A0')}\u00A0${ch_alter2}${scale[ch_alter2 - 1].padEnd(maxChordLength, '\u00A0')}${additional})</span> `;
+        // color chords if seventh goes from 1 to 25
+        if (seventh >= 1 && seventh <= 25) {
+            chordHTML = `${ch} <span style="font-weight: bold;" class="alternate-color">${scale[ch - 1].padEnd(maxChordLength, '\u00A0')}</span> <span style="font-size: 0.7em;">\u00A0(${ch_alter}${scale[ch_alter - 1].padEnd(maxChordLength, '\u00A0')}\u00A0${ch_alter2}${scale[ch_alter2 - 1].padEnd(maxChordLength, '\u00A0')}${additional})</span>`;
         }
 
         /*    before
-        let chordHTML = `[${ch}] [<span class="alternate-color-2">${scale[ch - 1].padEnd(maxChordLength, '\u00A0')}</span>] (alt\u00A0${ch_alter}\u00A0${scale[ch_alter - 1].padEnd(maxChordLength, '\u00A0')}\u00A0${ch_alter2}\u00A0${scale[ch_alter2 - 1].padEnd(maxChordLength, '\u00A0')}), (add\u00A0${additional},\u00A0${additional2})`;
+        let chordHTML = `[${ ch }][<span class="alternate-color-2">${scale[ch - 1].padEnd(maxChordLength, '\u00A0')}</span>](alt\u00A0${ ch_alter }\u00A0${ scale[ch_alter - 1].padEnd(maxChordLength, '\u00A0') }\u00A0${ ch_alter2 }\u00A0${ scale[ch_alter2 - 1].padEnd(maxChordLength, '\u00A0') }), (add\u00A0${ additional }, \u00A0${ additional2 })`;
         */
 
         // Append the chord HTML to the resultHTML string
@@ -152,25 +152,31 @@ function getChords(ch_num, selectedScale) {
 
 function rhythm() {
     let meas = [0.5, 1, 1];
-    //first chord will be 1 bar always
-    let rhythm = [1];
+    let rhythm = [];
     let a = 0;
-    let i = 1;
-    while (a < 3) {
-        rhythm[i] = meas[Math.floor(Math.random() * (2 - 0 + 1) + 0)];
+    let i = 0;
 
-        a += rhythm[i];
-        if (a > 3) {
-            rhythm[i] = rhythm[i] - (a - 3);
+    while (a < 4) {
+        rhythm[i] = meas[Math.floor(Math.random() * meas.length)];
 
-        };
-        //console.log(rhythm[i], i);
-        i++;
+        if (rhythm[i] === 0.5) {
+            rhythm[i + 1] = 0.5;
+            a += 1; // Since two 0.5's make 1
+            i += 2;
+        } else {
+            a += rhythm[i];
+            i++;
+        }
 
+        if (a > 4) {
+            rhythm[i - 1] -= a - 4;
+            a = 4;
+        }
     }
 
     return [rhythm, i];
 }
+
 
 document.getElementById('randButton').onclick = function () {
     console.clear();
