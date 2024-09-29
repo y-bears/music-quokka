@@ -24,11 +24,17 @@
 
 <body>
     <div class="container">
-        <h1>Random Chord Generator</h1>
+        <h1>Random Chord Type</h1>
 
         <label for="complexity">Complexity:</label>
-        <input type="range" id="complexity" min="0" max="4" value="0" step="1" oninput="updateComplexityLabel()">
-        <span id="complexityLabel">Basic</span><br><br>
+        <select id="complexity" onchange="updateComplexityLabel()">
+            <option value="0">Basic</option>
+            <option value="1">Low</option>
+            <option value="2" selected>Medium</option>
+            <option value="3">High</option>
+            <option value="4">Random</option>
+        </select>
+
 
         <button onclick="generateChords()">Generate Chords</button>
 
@@ -50,9 +56,9 @@
             // Chord definitions based on complexity
             const chordOptions = {
                 basic: { triad: 100, seventh: 15, fifth: 8 },
-                low: { triad: 100, seventh: 15, fifth: 8, sus2: 2, sus4: 2, add: 3, ext: 3 },
-                med: { triad: 100, seventh: 20, fifth: 15, sus2: 15, sus4: 15, add: 15, ext: 8 },
-                high: { triad: 80, seventh: 100, fifth: 75, sus2: 50, sus4: 50, add: 80, ext: 90 },
+                low: { triad: 100, seventh: 15, fifth: 8, sus2: 2, sus4: 2, add: 3, ext: 2 },
+                med: { triad: 100, seventh: 40, fifth: 15, sus2: 15, sus4: 15, add: 15, ext: 7 },
+                high: { triad: 80, seventh: 100, fifth: 75, sus2: 50, sus4: 50, add: 80, ext: 80 },
                 random: { triad: 100, seventh: 100, fifth: 100, sus2: 50, sus4: 50, add: 50, ext: 50 }
             };
 
@@ -93,7 +99,9 @@
                 cumulativeWeight += weight;
                 if (rand < cumulativeWeight) {
                     if (name === 'add' || name === 'ext') {
-                        return `${name}(${Math.floor(Math.random() * 3) + 9})`;
+                        const values = [9, 11, 13];
+                        const randomIndex = Math.floor(Math.random() * values.length);
+                        return `${name}(${values[randomIndex]})`;
                     }
                     return name;
                 }
