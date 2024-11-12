@@ -6,6 +6,7 @@
 ### - [arpeggio generator](https://y-bears.github.io/music-quokka/arp.html)
 ### - [rhythm generator (graphic)](https://y-bears.github.io/music-quokka/rhythm-boxes.html)
 ### - [chord type](https://y-bears.github.io/music-quokka/chorder.html)
+### - [notes](https://y-bears.github.io/music-quokka/random-note.html)
 
 
-29.09.2024 
+12.11.2024 

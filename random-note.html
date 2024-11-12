@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Scale Note Selector</title>
+    <link rel="stylesheet" href="colors.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <h1>Random Scale Note Selector</h1>
+
+    <label for="scaleSelector">Scale:</label>
+    <select id="scaleSelector">
+        <option value="C Major">C Major</option>
+        <option value="C Minor">C Minor</option>
+        <option value="C# Major">C# Major</option>
+        <option value="C# Minor">C# Minor</option>
+        <option value="D Major">D Major</option>
+        <option value="D Minor">D Minor</option>
+        <option value="D# Major">D# Major</option>
+        <option value="D# Minor">D# Minor</option>
+        <option value="E Major">E Major</option>
+        <option value="E Minor">E Minor</option>
+        <option value="F Major">F Major</option>
+        <option value="F Minor">F Minor</option>
+        <option value="F# Major">F# Major</option>
+        <option value="F# Minor">F# Minor</option>
+        <option value="G Major">G Major</option>
+        <option value="G Minor">G Minor</option>
+        <option value="G# Major">G# Major</option>
+        <option value="G# Minor">G# Minor</option>
+        <option value="A Major">A Major</option>
+        <option value="A Minor">A Minor</option>
+        <option value="A# Major">A# Major</option>
+        <option value="A# Minor">A# Minor</option>
+        <option value="B Major">B Major</option>
+        <option value="B Minor">B Minor</option>
+    </select>
+
+    <button id="randomizeScale">Rand. Scale</button><br>
+    <button id="selectRandomNote">Rand. Note</button>
+    <button id="clearOutput">Clear</button>
+
+    <div id="output">Output:</div>
+
+    <script>
+        const scales = {
+            "C Major": ["C", "D", "E", "F", "G", "A", "B"],
+            "C Minor": ["C", "D", "D#", "F", "G", "G#", "A#"],
+            "C# Major": ["C#", "D#", "F", "F#", "G#", "A#", "C"],
+            "C# Minor": ["C#", "D#", "E", "F#", "G#", "A", "B"],
+            "D Major": ["D", "E", "F#", "G", "A", "B", "C#"],
+            "D Minor": ["D", "E", "F", "G", "A", "A#", "C"],
+            "D# Major": ["D#", "F", "G", "G#", "A#", "C", "D"],
+            "D# Minor": ["D#", "F", "F#", "G#", "A#", "B", "C#"],
+            "E Major": ["E", "F#", "G#", "A", "B", "C#", "D#"],
+            "E Minor": ["E", "F#", "G", "A", "B", "C", "D"],
+            "F Major": ["F", "G", "A", "A#", "C", "D", "E"],
+            "F Minor": ["F", "G", "G#", "A#", "C", "C#", "D#"],
+            "F# Major": ["F#", "G#", "A#", "B", "C#", "D#", "F"],
+            "F# Minor": ["F#", "G#", "A", "B", "C#", "D", "E"],
+            "G Major": ["G", "A", "B", "C", "D", "E", "F#"],
+            "G Minor": ["G", "A", "A#", "C", "D", "D#", "F"],
+            "G# Major": ["G#", "A#", "C", "C#", "D#", "F", "G"],
+            "G# Minor": ["G#", "A#", "B", "C#", "D#", "E", "F#"],
+            "A Major": ["A", "B", "C#", "D", "E", "F#", "G#"],
+            "A Minor": ["A", "B", "C", "D", "E", "F", "G"],
+            "A# Major": ["A#", "C", "D", "D#", "F", "G", "A"],
+            "A# Minor": ["A#", "C", "C#", "D#", "F", "F#", "G#"],
+            "B Major": ["B", "C#", "D#", "E", "F#", "G#", "A#"],
+            "B Minor": ["B", "C#", "D", "E", "F#", "G", "A"]
+        };
+
+        const scaleSelector = document.getElementById("scaleSelector");
+        const output = document.getElementById("output");
+
+        document.getElementById("randomizeScale").addEventListener("click", () => {
+            const keys = Object.keys(scales);
+            const selectedScale = keys[Math.floor(Math.random() * keys.length)];
+            scaleSelector.value = selectedScale;
+        });
+
+        document.getElementById("selectRandomNote").addEventListener("click", () => {
+            const selectedScale = scaleSelector.value;
+            if (scales[selectedScale]) {
+                const notes = scales[selectedScale];
+                const randomNote = notes[Math.floor(Math.random() * notes.length)];
+                output.innerHTML += ` &nbsp;${randomNote}`;  // Added non-breaking space here
+            } else {
+                output.innerText += " Invalid scale selected.";
+            }
+        });
+
+        document.getElementById("clearOutput").addEventListener("click", () => {
+            output.innerText = "Output:";
+        });
+    </script>
+</body>
+
+</html>

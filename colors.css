@@ -1,0 +1,136 @@
+/* Base styles */
+body {
+    background-color: #262626;
+    color: #f6bfbf;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2em;
+    gap: 10px;
+}
+
+
+
+input[type="number"] {
+    background-color: #735840;
+    color: inherit;
+    border: 1px solid #D9B384;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 5px 0;
+    width: 3em;
+}
+
+input[type="checkbox"] {
+    accent-color: #D9B384;
+    transform: scale(1.2);
+    /* Scale  */
+    -ms-transform: scale(1.2);
+    /* For IE 9 */
+    -webkit-transform: scale(1.2);
+    /* For Safari */
+}
+
+input[type="radio"] {
+    transform: scale(1.2);
+    /* Scale  */
+    -ms-transform: scale(1.2);
+    /* For IE 9 */
+    -webkit-transform: scale(1.2);
+    /* For Safari */
+}
+
+select {
+    background-color: #735840;
+    color: inherit;
+    border: 1px solid #D9B384;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 10px 0;
+
+}
+
+button {
+    background-color: #D9B384;
+    color: #262626;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    padding: 5px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px;
+    min-width: 90px;
+}
+
+button:hover {
+    background-color: #A6A6A6;
+}
+
+.result1 {
+    text-align: left;
+    font-family: monospace;
+    font-size: 1.2em;
+}
+
+.left-align {
+    text-align: left;
+}
+
+#result {
+    font-size: 1.2em;
+    color: #c1c1c1;
+}
+
+#result span {
+    margin-right: 10px;
+}
+
+/* Alternate color  */
+.alternate-color {
+    color: #bc9069;
+}
+
+/* Alternate color-2  */
+.alternate-color-2 {
+    color: #9494ff;
+    font-weight: bold;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    input[type="number"],
+    button.button {
+
+        padding: 10px;
+    }
+
+
+}
+
+/* Media query for extra small screens */
+@media (max-width: 425px) {
+    body {
+        display: block;
+    }
+
+    .container {
+        width: unset;
+    }
+
+    button.button {
+        width: 80%;
+    }
+
+    button.no-resize-button {
+        width: unset;
+    }
+}
+
+/* Hidden elements */
+#infoText {
+    display: none;
+    /* Hide this element on small screens */
+}
