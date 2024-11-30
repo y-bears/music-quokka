@@ -95,7 +95,7 @@ function generatePattern(numO, steps, drumType) {
 function getWeightedRandomIndex(steps, drumType) {
     // Define weights for each drum type
     const weights = {
-        'kick_out': steps === 8 ? [10, 1, 1, 1, 1, 1, 1, 1] : [100, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1],
+        'kick_out': steps === 8 ? [10, 1, 1, 1, 5, 1, 1, 1] : [100, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1],
         'snare-out': steps === 8 ? [10, 10, 10, 10, 10, 10, 10, 10] : [10, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1],
         'hi-hat-out': steps === 8 ? [10, 10, 10, 10, 10, 10, 10, 10] : [10, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1]
     };
