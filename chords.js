@@ -1,33 +1,41 @@
-var scaleNotes = {
+const scaleNotes = {
     'C major': ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'],
-    'C# major': ['C#', 'D#m', 'E#m', 'F#', 'G#', 'A#m', 'Cdim'],
+    'C# major': ['C#', 'D#m', 'Fm', 'F#', 'G#', 'A#m', 'Cdim'],
     'Db major': ['Db', 'Ebm', 'Fm', 'Gb', 'Ab', 'Bbm', 'Cdim'],
     'D major': ['D', 'Em', 'F#m', 'G', 'A', 'Bm', 'C#dim'],
+    'D# major': ['D#', 'Fm', 'Gm', 'G#', 'A#', 'Cm', 'Ddim'],
     'Eb major': ['Eb', 'Fm', 'Gm', 'Ab', 'Bb', 'Cm', 'Ddim'],
     'E major': ['E', 'F#m', 'G#m', 'A', 'B', 'C#m', 'D#dim'],
     'F major': ['F', 'Gm', 'Am', 'Bb', 'C', 'Dm', 'Edim'],
     'F# major': ['F#', 'G#m', 'A#m', 'B', 'C#', 'D#m', 'Fdim'],
     'Gb major': ['Gb', 'Abm', 'Bbm', 'B', 'Db', 'Ebm', 'Fdim'],
     'G major': ['G', 'Am', 'Bm', 'C', 'D', 'Em', 'F#dim'],
-    'Ab major': ['Ab', 'Bbm', 'Cm', 'Db', 'Ebm', 'Fm', 'Gdim'],
+    'G# major': ['G#', 'A#m', 'Cm', 'C#', 'D#', 'Fm', 'Gdim'],
+    'Ab major': ['Ab', 'Bbm', 'Cm', 'Db', 'Eb', 'Fm', 'Gdim'],
     'A major': ['A', 'Bm', 'C#m', 'D', 'E', 'F#m', 'G#dim'],
+    'A# major': ['A#', 'Cm', 'Dm', 'D#', 'F', 'Gm', 'Adim'],
     'Bb major': ['Bb', 'Cm', 'Dm', 'Eb', 'F', 'Gm', 'Adim'],
     'B major': ['B', 'C#m', 'D#m', 'E', 'F#', 'G#m', 'A#dim'],
     'A minor': ['Am', 'Bdim', 'C', 'Dm', 'Em', 'F', 'G'],
-    'A# minor': ['A#m', 'Cdim', 'C#', 'D#m', 'E#m', 'F#', 'G#'],
+    'A# minor': ['A#m', 'Cdim', 'C#', 'D#m', 'Fm', 'F#', 'G#'],
     'Bb minor': ['Bbm', 'Cdim', 'Db', 'Ebm', 'Fm', 'Gb', 'Ab'],
     'B minor': ['Bm', 'C#dim', 'D', 'Em', 'F#m', 'G', 'A'],
     'C minor': ['Cm', 'Ddim', 'Eb', 'Fm', 'Gm', 'Ab', 'Bb'],
-    'C# minor': ['C#m', 'Ddim', 'E', 'F#m', 'G#m', 'A', 'B'],
+    'C# minor': ['C#m', 'D#dim', 'E', 'F#m', 'G#m', 'A', 'B'],
+    'Db minor': ['Dbm', 'Ebdim', 'E', 'Gbm', 'Abm', 'A', 'B'],
     'D minor': ['Dm', 'Edim', 'F', 'Gm', 'Am', 'Bb', 'C'],
     'D# minor': ['D#m', 'Fdim', 'F#', 'G#m', 'A#m', 'B', 'C#'],
     'Eb minor': ['Ebm', 'Fdim', 'Gb', 'Abm', 'Bbm', 'B', 'Db'],
     'E minor': ['Em', 'F#dim', 'G', 'Am', 'Bm', 'C', 'D'],
-    'F minor': ['Fm', 'Gdim', 'Ab', 'Bbm', 'Cm', 'Db', 'Ebm'],
+    'F minor': ['Fm', 'Gdim', 'Ab', 'Bbm', 'Cm', 'Db', 'Eb'],
     'F# minor': ['F#m', 'G#dim', 'A', 'Bm', 'C#m', 'D', 'E'],
+    'Gb minor': ['Gbm', 'Abdim', 'A', 'Bm', 'Dbm', 'D', 'E'],
     'G minor': ['Gm', 'Adim', 'Bb', 'Cm', 'Dm', 'Eb', 'F'],
-    'G# minor': ['G#m', 'A#dim', 'B', 'C#', 'D#', 'E', 'F#']
+    'G# minor': ['G#m', 'A#dim', 'B', 'C#m', 'D#m', 'E', 'F#'],
+    'Ab minor': ['Abm', 'Bbdim', 'B', 'Dbm', 'Ebm', 'E', 'Gb']
 };
+
+
 
 //ch_num = input('How many chords or [r]andom: ')
 
