@@ -159,18 +159,20 @@ function getChords(ch_num, selectedScale) {
 
 
 function rhythm() {
-    let meas = [0.5, 1, 1];
+    let meas = [0.5, 1, 1, 1];
     let rhythm = [];
     let a = 0;
     let i = 0;
 
     while (a < 4) {
+        console.log("chances of chord lenght = ", meas);
         rhythm[i] = meas[Math.floor(Math.random() * meas.length)];
 
         if (rhythm[i] === 0.5) {
             rhythm[i + 1] = 0.5;
             a += 1; // Since two 0.5's make 1
             i += 2;
+            meas = [0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
         } else {
             a += rhythm[i];
             i++;
