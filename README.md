@@ -12,4 +12,4 @@
 
 3.12.2024 1518
 
-This project is maintained by [y-bears](https://github.com/y-bears)
+>his project is maintained by [y-bears](https://github.com/y-bears)
