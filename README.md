@@ -10,6 +10,7 @@
 - [notes](https://y-bears.github.io/music-quokka/random-note.html)
 
 
-3.12.2024 1518
-
->his project is maintained by [y-bears](https://github.com/y-bears)
+3.12.2024 1548
+```
+This project is maintained by [y-bears](https://github.com/y-bears)
+```
