@@ -1,4 +1,5 @@
-#### Music generators
+![logo](./assets/img/logo.png)
+# Music generators
 - [bpm, rhythm, melody generators](https://y-bears.github.io/music-quokka/bpm-rhythm-melody.html)
 - [drums generator](https://y-bears.github.io/music-quokka/drums.html)
 - [scale and chords generators](https://y-bears.github.io/music-quokka/scale-chords.html)
@@ -9,4 +10,4 @@
 - [notes](https://y-bears.github.io/music-quokka/random-note.html)
 
 
-3.12.2024 1454
+3.12.2024 1513
