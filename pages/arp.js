@@ -63,6 +63,6 @@ document.getElementById('new').onclick = function () {
     document.getElementById('result-d').innerHTML = "";
     document.getElementById('res-all').innerHTML = '';
     newA();
-    document.getElementById('al').textContent = `Arpeggio length: ${al}`;
-    document.getElementById('al_alt').textContent = `Arpeggio length: ${al_alt}`;
+    document.getElementById('al').textContent = `Arp length: ${al}`;
+    document.getElementById('al_alt').textContent = `Arp length: ${al_alt}`;
 }

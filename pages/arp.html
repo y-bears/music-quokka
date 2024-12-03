@@ -7,11 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arpeggio gen v1</title>
     <link rel="stylesheet" href="styles-2.css">
+    <style>
+        .container {
+            width: 80%;
+        }
+
+        @media (max-width: 425px) {
+            .container {
+                width: 99%;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <label>[ Arpeggio generator, 2 octaves ]</label><br><br>
+    <div id="back">
+        <a href="../index.html">[back]</a>
+    </div>
+    <div class="container"">
+        <label style=" font-size: larger;">
+        <p>[ Arpeggio generator, 2 octaves ]</p>
+        </label>
         <label for="notes-chord">How many notes in chord </label><br>
         <!-- Use a dropdown for selecting the number of notes in the chord -->
         <select id="notes-chord" name="n_c">
@@ -24,7 +40,7 @@
         </select><br>
 
 
-        <label for="arp-length">Arpeggio length </label><br>
+        <label for="arp-length">Arp length </label><br>
         <!-- Use a dropdown for selecting the arpeggio length -->
         <select id="arp-length" name="arp_len_u">
             <option value="2">2</option>
