@@ -3,90 +3,78 @@ document.getElementById("hi-hat_btn").addEventListener("click", () => generateDr
 document.getElementById("snare_btn").addEventListener("click", () => generateDrumPattern('snare-out'));
 document.getElementById("kick_btn").addEventListener("click", () => generateDrumPattern('kick_out'));
 
+
 function generateAllDrums() {
-    generateDrumPattern('hi-hat-out');
-    generateDrumPattern('snare-out');
-    generateDrumPattern('kick_out');
+    generateDrumPattern('hi-hat-out');  // Generate for hi-hat
+    generateDrumPattern('snare-out');   // Generate for snare
+    generateDrumPattern('kick_out');    // Generate for kick
 }
 
 function generateDrumPattern(drumType) {
-    console.log('Generating pattern for:', drumType);
+    console.log('Generating pattern for:', drumType); // Debugging log
 
-    const steps = parseInt(document.querySelector('input[name="drumSteps"]:checked').value, 10);
+    const steps = document.querySelector('input[name="drumSteps"]:checked').value;
     const density = document.querySelector('input[name="drum-density"]:checked').value;
+    const itemsCount = parseInt(steps, 10);
 
-    // Get density number
-    const numO = getDensity(drumType, density, steps);
+    let numO;
+    let minO, maxO;
 
-    console.log(`Drum Type: ${drumType}, Steps: ${steps}, Density: ${density}, numO: ${numO}`);
+    // Set range of "O" based on drum type and density
+    switch (density) {
+        case 'hi-density':
+            [minO, maxO] = getDensityRange(drumType, 'high', itemsCount);
+            break;
+        case 'med-density':
+            [minO, maxO] = getDensityRange(drumType, 'medium', itemsCount);
+            break;
+        case 'low-density':
+            [minO, maxO] = getDensityRange(drumType, 'low', itemsCount);
+            break;
+        case 'rand-density':
+            [minO, maxO] = [0, itemsCount]; // Fully random
+            break;
+    }
 
-    let pattern = generatePattern(numO, steps, drumType);
+    numO = getRandomInt(minO, maxO + 1);
+    let pattern = generatePattern(numO, itemsCount, drumType);
 
     // Insert separators
-    const formattedPattern = formatPattern(pattern, steps);
+    const formattedPattern = formatPattern(pattern, itemsCount);
 
     // Display the pattern in the corresponding label
     document.getElementById(drumType).textContent = formattedPattern;
 }
 
-function getDensity(drumType, density, steps) {
-    const densityMapping = {
-        "hi-density": "high",
-        "med-density": "medium",
-        "low-density": "low",
-        "rand-density": "random"
-    };
 
-    let mappedDensity = densityMapping[density];
-    if (!mappedDensity) {
-        console.error(`Invalid density value: ${density}`);
-        return 0;
-    }
-
+function getDensityRange(drumType, density, steps) {
     const is16 = steps === 16;
-    const arrays = {
+    const ranges = {
         'kick_out': {
-            low: [0, 1, 1, 2],
-            medium: [1, 2, 3, 3, 4],
-            high: [3, 4, 4, 5, 5, 6, 7, 8]
+            low: [1, 3],
+            medium: [2, 5],
+            high: [2, 8]
         },
         'snare-out': {
-            low: [0, 0, 1, 1, 1, 2],
-            medium: [1, 1, 2, 2, 3],
-            high: [2, 3, 3, 4, 5]
+            low: [1, 2],
+            medium: [1, 4],
+            high: [2, 5]
         },
         'hi-hat-out': {
-            low: [1, 2, 2, 3],
-            medium: [3, 4, 4, 5, 6],
-            high: [5, 6, 6, 7, 8, 8]
+            low: [2, 4],
+            medium: [4, 7],
+            high: [5, 8]
         }
     };
 
-    // Handle rand-density
-    if (mappedDensity === "random") {
-        const densities = ["low", "medium", "high"];
-        mappedDensity = densities[Math.floor(Math.random() * densities.length)];
-        console.log(`Randomly selected density: ${mappedDensity}`);
-    }
-
-    if (!arrays[drumType] || !arrays[drumType][mappedDensity]) {
-        console.error(`Invalid drumType (${drumType}) or density (${mappedDensity})`);
-        return 0;
-    }
-
-    let resultDensity = arrays[drumType][mappedDensity];
-    let selectedDensity = resultDensity[Math.floor(Math.random() * resultDensity.length)];
-
+    let [minO, maxO] = ranges[drumType][density];
     if (is16) {
-        selectedDensity = Math.round(selectedDensity * 1.7);
+        // Double the range for 16 steps
+        maxO = Math.round(maxO * 1.7);
     }
 
-    console.log(`Selected density for ${drumType}, ${density}, ${steps} steps: ${selectedDensity}`);
-    return selectedDensity;
+    return [minO, maxO];
 }
-
-
-
 
 function generatePattern(numO, steps, drumType) {
     let pattern = new Array(steps).fill("-");
@@ -103,17 +91,25 @@ function generatePattern(numO, steps, drumType) {
     return pattern;
 }
 
+
 function getWeightedRandomIndex(steps, drumType) {
+    // Define weights for each drum type
     const weights = {
         'kick_out': steps === 8 ? [30, 1, 1, 1, 20, 1, 1, 1] : [300, 1, 10, 1, 10, 1, 10, 1, 200, 1, 10, 1, 10, 1, 10, 1],
         'snare-out': steps === 8 ? [1, 1, 5, 1, 1, 1, 5, 1] : [10, 1, 10, 1, 50, 1, 10, 1, 10, 1, 10, 1, 50, 1, 10, 1],
         'hi-hat-out': steps === 8 ? [20, 10, 10, 10, 20, 10, 10, 10] : [40, 1, 20, 1, 20, 1, 20, 1, 40, 1, 20, 1, 20, 1, 20, 1]
     };
 
+    // Debugging log
+    console.log('Drum Type:', drumType);
+
     const drumWeights = weights[drumType];
+
     if (!Array.isArray(drumWeights)) {
-        throw new Error(`Invalid weights for drumType: ${drumType}`);
+        throw new Error(`Weights for ${drumType} are not defined properly.`);
     }
+
+    console.log('Drum Weights:', drumWeights);
 
     let cumulativeWeights = [];
     let sum = 0;
@@ -128,6 +124,9 @@ function getWeightedRandomIndex(steps, drumType) {
     return cumulativeWeights.findIndex(cumulativeWeight => random < cumulativeWeight);
 }
 
+
+
+
 function formatPattern(pattern, steps) {
     let formatted = '';
     for (let i = 0; i < steps; i++) {
@@ -137,4 +136,8 @@ function formatPattern(pattern, steps) {
         formatted += pattern[i];
     }
     return formatted;
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
 }
