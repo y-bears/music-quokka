@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-Bar Visual Rhythm Generator</title>
+    <style>
+        /* Light Theme (Default) - Less Bright */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f9f9f9;
+            /* Softer white */
+            color: #333333;
+            /* Darker text for better contrast */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #e0e0e0;
+            /* Light gray */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .bar {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            /* Lighter border */
+            border-radius: 5px;
+            display: inline-block;
+            transition: border-color 0.3s;
+        }
+
+        .note {
+            display: inline-block;
+            height: 60px;
+            line-height: 60px;
+            margin: 5px;
+            background-color: #e0e0e0;
+            /* Light gray */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+            overflow: hidden;
+            /* Ensure text doesn't overflow */
+        }
+
+        /* Dark Theme */
+        body.dark-theme {
+            background-color: #121212;
+            color: #e0e0e0;
+            /* Softer white text */
+        }
+
+        body.dark-theme button {
+            background-color: #333333;
+            color: #e0e0e0;
+            /* Softer white text */
+            border-color: #555555;
+        }
+
+        body.dark-theme .note {
+            background-color: #333333;
+            color: #e0e0e0;
+            /* Softer white text */
+            border-color: #555555;
+        }
+
+        body.dark-theme .bar {
+            border-color: #e0e0e0;
+            /* Softer white border */
+        }
+
+        /* Checkbox styling */
+        .options {
+            margin-top: 20px;
+        }
+
+        .options label {
+            margin-right: 15px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>2-Bar Visual Rhythm Generator</h1>
+    <button onclick="generateRhythm()">Generate Rhythm</button>
+    <button onclick="toggleTheme()">Toggle Theme</button>
+
+    <div class="options">
+        <label>
+            <input type="checkbox" id="wholeNoteCheckbox"> Include Whole Notes (1)
+        </label>
+        <label>
+            <input type="checkbox" id="sixteenthNoteCheckbox"> Include 16th Notes
+        </label>
+    </div>
+
+    <div id="rhythmDisplay" style="margin-top: 20px;"></div>
+
+    <script>
+        // Constants
+        const beatsPerBar = 4; // 4/4 time signature
+        const totalBars = 2; // 2 bars
+        const totalBeats = beatsPerBar * totalBars; // Total beats in 2 bars
+
+        // Base width for a whole note (4 beats)
+        const baseWidth = 120; // Width in pixels for a whole note
+
+        // Default note lengths (without whole and 16th notes)
+        let noteLengths = [
+            { name: "2", value: 2 }, // Half note (2 beats)
+            { name: "4", value: 1 }, // Quarter note (1 beat)
+            { name: "8", value: 0.5 } // Eighth note (0.5 beats)
+        ];
+
+        // Function to generate a random rhythm
+        function generateRhythm() {
+            const rhythmDisplay = document.getElementById('rhythmDisplay');
+            rhythmDisplay.innerHTML = ''; // Clear previous rhythm
+
+            // Update note lengths based on checkboxes
+            const includeWholeNote = document.getElementById('wholeNoteCheckbox').checked;
+            const includeSixteenthNote = document.getElementById('sixteenthNoteCheckbox').checked;
+
+            let availableNoteLengths = [...noteLengths]; // Copy default note lengths
+
+            if (includeWholeNote) {
+                availableNoteLengths.push({ name: "1", value: 4 }); // Add whole note (1)
+            }
+            if (includeSixteenthNote) {
+                availableNoteLengths.push({ name: "", value: 0.25 }); // Add 16th note (no text)
+            }
+
+            let remainingBeats = totalBeats;
+
+            // Create a container for each bar
+            for (let bar = 0; bar < totalBars; bar++) {
+                const barContainer = document.createElement('div');
+                barContainer.className = 'bar';
+                rhythmDisplay.appendChild(barContainer);
+
+                let barBeats = 0;
+
+                while (barBeats < beatsPerBar) {
+                    // Randomly select a note length
+                    const randomNote = availableNoteLengths[Math.floor(Math.random() * availableNoteLengths.length)];
+
+                    // Ensure the note fits in the remaining beats of the bar
+                    if (randomNote.value <= (beatsPerBar - barBeats)) {
+                        // Create a note element
+                        const noteElement = document.createElement('div');
+                        noteElement.className = 'note';
+                        noteElement.textContent = randomNote.name;
+
+                        // Set the width of the note based on its length
+                        const noteWidth = (randomNote.value / 4) * baseWidth;
+                        noteElement.style.width = `${noteWidth}px`;
+
+                        // Adjust font size for smaller boxes
+                        if (randomNote.value === 0.5) {
+                            noteElement.style.fontSize = "14px"; // Smaller font for 8th notes
+                        }
+
+                        barContainer.appendChild(noteElement);
+
+                        // Update the beats used in the current bar
+                        barBeats += randomNote.value;
+                    }
+                }
+            }
+        }
+
+        // Function to toggle between light and dark themes
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-theme');
+
+            // Save the current theme to localStorage
+            if (body.classList.contains('dark-theme')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Apply saved theme on page load
+        window.onload = function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+            }
+        };
+
+    </script>
+
+</body>
+
+</html>
