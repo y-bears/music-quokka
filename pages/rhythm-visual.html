@@ -189,20 +189,18 @@
             body.classList.toggle('dark-theme');
 
             // Save the current theme to localStorage
-            if (body.classList.contains('dark-theme')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
+            localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark' : 'light');
         }
 
-        // Apply saved theme on page load
+        // Apply saved theme on page load, default to dark if none is set
         window.onload = function () {
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-theme');
+
+            if (savedTheme === 'dark' || savedTheme === null) {
+                document.body.classList.add('dark-theme'); // Default to dark
             }
         };
+
 
     </script>
 
