@@ -144,8 +144,6 @@
                 availableNoteLengths.push({ name: "", value: 0.25 }); // Add 16th note (no text)
             }
 
-            let remainingBeats = totalBeats;
-
             // Create a container for each bar
             for (let bar = 0; bar < totalBars; bar++) {
                 const barContainer = document.createElement('div');
@@ -153,10 +151,41 @@
                 rhythmDisplay.appendChild(barContainer);
 
                 let barBeats = 0;
+                let lastNoteType = null; // Track the last note type
+                let consecutiveCount = 0; // Track consecutive notes of the same type
 
                 while (barBeats < beatsPerBar) {
-                    // Randomly select a note length
-                    const randomNote = availableNoteLengths[Math.floor(Math.random() * availableNoteLengths.length)];
+                    let randomNote;
+
+                    // Apply Markov chain logic
+                    if (lastNoteType === "4" && consecutiveCount === 1) {
+                        // After a 4th note, 10% chance to repeat, 90% random
+                        if (Math.random() < 0.1) {
+                            console.log("Repeating 4th note");
+                            randomNote = availableNoteLengths.find(note => note.name === "4");
+                        } else {
+                            randomNote = getRandomNote(availableNoteLengths, "4");
+                        }
+                    } else if (lastNoteType === "8" && consecutiveCount < 4) {
+                        // After an 8th note, 50% chance to repeat, 50% random
+                        if (Math.random() < 0.5) {
+                            console.log("Repeating 8th note");
+                            randomNote = availableNoteLengths.find(note => note.name === "8");
+                        } else {
+                            randomNote = getRandomNote(availableNoteLengths, "8");
+                        }
+                    } else if (lastNoteType === "" && consecutiveCount < 2) {
+                        // After a 16th note, 80% chance to repeat, 20% random
+                        if (Math.random() < 0.8) {
+                            console.log("Repeating 16th note");
+                            randomNote = availableNoteLengths.find(note => note.name === "");
+                        } else {
+                            randomNote = getRandomNote(availableNoteLengths, "");
+                        }
+                    } else {
+                        // Randomly select a note length
+                        randomNote = availableNoteLengths[Math.floor(Math.random() * availableNoteLengths.length)];
+                    }
 
                     // Ensure the note fits in the remaining beats of the bar
                     if (randomNote.value <= (beatsPerBar - barBeats)) {
@@ -178,9 +207,29 @@
 
                         // Update the beats used in the current bar
                         barBeats += randomNote.value;
+
+                        // Update lastNoteType and consecutiveCount
+                        if (randomNote.name === lastNoteType) {
+                            consecutiveCount++;
+                        } else {
+                            lastNoteType = randomNote.name;
+                            consecutiveCount = 1;
+                        }
+
+                        // Reset consecutiveCount if max is reached
+                        if ((lastNoteType === "8" && consecutiveCount === 4) || (lastNoteType === "" && consecutiveCount === 2)) {
+                            console.log("Resetting consecutive count");
+                            consecutiveCount = 0;
+                        }
                     }
                 }
             }
+        }
+
+        // Helper function to get a random note, excluding a specific type
+        function getRandomNote(availableNoteLengths, excludeType) {
+            const filteredNotes = availableNoteLengths.filter(note => note.name !== excludeType);
+            return filteredNotes[Math.floor(Math.random() * filteredNotes.length)];
         }
 
         // Function to toggle between light and dark themes
@@ -200,8 +249,6 @@
                 document.body.classList.add('dark-theme'); // Default to dark
             }
         };
-
-
     </script>
 
 </body>
