@@ -5,99 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2-Bar Visual Rhythm Generator</title>
+    <link rel="stylesheet" href="styles-2.css">
     <style>
-        /* Light Theme (Default) - Less Bright */
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-color: #f9f9f9;
-            /* Softer white */
-            color: #333333;
-            /* Darker text for better contrast */
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #e0e0e0;
-            /* Light gray */
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
+        #back {
+            width: 100%;
+            box-sizing: border-box;
+            padding-top: 20px;
+            padding-left: 20px;
+            text-align: left;
         }
 
         .bar {
             margin-bottom: 20px;
+            margin-left: 10px;
             padding: 10px;
-            border: 2px solid #ccc;
-            /* Lighter border */
+            border: 2px solid;
             border-radius: 5px;
             display: inline-block;
-            transition: border-color 0.3s;
         }
 
         .note {
             display: inline-block;
             height: 60px;
             line-height: 60px;
-            margin: 5px;
-            background-color: #e0e0e0;
-            /* Light gray */
-            border: 1px solid #ccc;
+            margin: 1px;
+            border: 1px solid;
             border-radius: 5px;
             font-size: 18px;
             text-align: center;
-            transition: background-color 0.3s, color 0.3s;
             overflow: hidden;
+            background-color: rgb(51, 48, 48);
+
             /* Ensure text doesn't overflow */
-        }
-
-        /* Dark Theme */
-        body.dark-theme {
-            background-color: #121212;
-            color: #e0e0e0;
-            /* Softer white text */
-        }
-
-        body.dark-theme button {
-            background-color: #333333;
-            color: #e0e0e0;
-            /* Softer white text */
-            border-color: #555555;
-        }
-
-        body.dark-theme .note {
-            background-color: #333333;
-            color: #e0e0e0;
-            /* Softer white text */
-            border-color: #555555;
-        }
-
-        body.dark-theme .bar {
-            border-color: #e0e0e0;
-            /* Softer white border */
-        }
-
-        /* Checkbox styling */
-        .options {
-            margin-top: 20px;
-        }
-
-        .options label {
-            margin-right: 15px;
-            font-size: 16px;
         }
     </style>
 </head>
 
 <body>
-
+    <div id="back">
+        <a href="../index.html">[back]</a>
+    </div>
     <h1>2-Bar Visual Rhythm Generator</h1>
     <button onclick="generateRhythm()">Generate Rhythm</button>
-    <button onclick="toggleTheme()">Toggle Theme</button>
 
     <div class="options">
         <label>
@@ -232,23 +181,7 @@
             return filteredNotes[Math.floor(Math.random() * filteredNotes.length)];
         }
 
-        // Function to toggle between light and dark themes
-        function toggleTheme() {
-            const body = document.body;
-            body.classList.toggle('dark-theme');
 
-            // Save the current theme to localStorage
-            localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark' : 'light');
-        }
-
-        // Apply saved theme on page load, default to dark if none is set
-        window.onload = function () {
-            const savedTheme = localStorage.getItem('theme');
-
-            if (savedTheme === 'dark' || savedTheme === null) {
-                document.body.classList.add('dark-theme'); // Default to dark
-            }
-        };
     </script>
 
 </body>
