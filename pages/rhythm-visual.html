@@ -35,8 +35,6 @@
             text-align: center;
             overflow: hidden;
             background-color: rgb(51, 48, 48);
-
-            /* Ensure text doesn't overflow */
         }
     </style>
 </head>
@@ -45,145 +43,194 @@
     <div id="back">
         <a href="../index.html">[back]</a>
     </div>
-    <h1>2-Bar Visual Rhythm Generator</h1>
-    <button onclick="generateRhythm()">Generate Rhythm</button>
+    <h2>2-Bar Visual Rhythm Generator</h1>
+        <button onclick="generateRhythm()">Generate Rhythm</button>
+        <button onclick="resetCheckboxes()">Reset to (2,4,8)</button>
 
-    <div class="options">
-        <label>
-            <input type="checkbox" id="wholeNoteCheckbox"> Include Whole Notes (1)
-        </label>
-        <label>
-            <input type="checkbox" id="sixteenthNoteCheckbox"> Include 16th Notes
-        </label>
-    </div>
+        <div class="options" style="margin-top: 10px;">
+            <label>
+                <input type="checkbox" id="wholeNoteCheckbox">(1)
+            </label>
+            <label>
+                <input type="checkbox" id="halfNoteCheckbox" checked>(2)
+            </label>
+            <label>
+                <input type="checkbox" id="quarterNoteCheckbox" checked>(4)
+            </label>
+            <label>
+                <input type="checkbox" id="eighthNoteCheckbox" checked>(8)
+            </label>
+            <label>
+                <input type="checkbox" id="sixteenthNoteCheckbox">(16)
+            </label>
+        </div>
 
-    <div id="rhythmDisplay" style="margin-top: 20px;"></div>
+        <div id="rhythmDisplay" style="margin-top: 20px;"></div>
 
-    <script>
-        // Constants
-        const beatsPerBar = 4; // 4/4 time signature
-        const totalBars = 2; // 2 bars
-        const totalBeats = beatsPerBar * totalBars; // Total beats in 2 bars
+        <script>
+            // Constants
+            const beatsPerBar = 4; // 4/4 time signature
+            const totalBars = 2; // 2 bars
+            const totalBeats = beatsPerBar * totalBars; // Total beats in 2 bars
+            const baseWidth = 120; // Width in pixels for a whole note
 
-        // Base width for a whole note (4 beats)
-        const baseWidth = 120; // Width in pixels for a whole note
+            // All possible note lengths
+            const allNoteLengths = [
+                { name: "1", value: 4 },    // Whole note
+                { name: "2", value: 2 },    // Half note
+                { name: "4", value: 1 },    // Quarter note
+                { name: "8", value: 0.5 },  // Eighth note
+                { name: "", value: 0.25 }   // Sixteenth note
+            ];
 
-        // Default note lengths (without whole and 16th notes)
-        let noteLengths = [
-            { name: "2", value: 2 }, // Half note (2 beats)
-            { name: "4", value: 1 }, // Quarter note (1 beat)
-            { name: "8", value: 0.5 } // Eighth note (0.5 beats)
-        ];
+            // Load saved checkbox states or set defaults
+            function loadCheckboxStates() {
+                const defaultStates = {
+                    wholeNoteCheckbox: false,
+                    halfNoteCheckbox: true,
+                    quarterNoteCheckbox: true,
+                    eighthNoteCheckbox: true,
+                    sixteenthNoteCheckbox: false
+                };
 
-        // Function to generate a random rhythm
-        function generateRhythm() {
-            const rhythmDisplay = document.getElementById('rhythmDisplay');
-            rhythmDisplay.innerHTML = ''; // Clear previous rhythm
-
-            // Update note lengths based on checkboxes
-            const includeWholeNote = document.getElementById('wholeNoteCheckbox').checked;
-            const includeSixteenthNote = document.getElementById('sixteenthNoteCheckbox').checked;
-
-            let availableNoteLengths = [...noteLengths]; // Copy default note lengths
-
-            if (includeWholeNote) {
-                availableNoteLengths.push({ name: "1", value: 4 }); // Add whole note (1)
+                for (let id in defaultStates) {
+                    const savedState = localStorage.getItem(id);
+                    document.getElementById(id).checked = savedState !== null ? JSON.parse(savedState) : defaultStates[id];
+                }
             }
-            if (includeSixteenthNote) {
-                availableNoteLengths.push({ name: "", value: 0.25 }); // Add 16th note (no text)
+
+            // Save checkbox states
+            function saveCheckboxStates() {
+                const checkboxIds = [
+                    'wholeNoteCheckbox',
+                    'halfNoteCheckbox',
+                    'quarterNoteCheckbox',
+                    'eighthNoteCheckbox',
+                    'sixteenthNoteCheckbox'
+                ];
+                checkboxIds.forEach(id => {
+                    localStorage.setItem(id, document.getElementById(id).checked);
+                });
             }
 
-            // Create a container for each bar
-            for (let bar = 0; bar < totalBars; bar++) {
-                const barContainer = document.createElement('div');
-                barContainer.className = 'bar';
-                rhythmDisplay.appendChild(barContainer);
+            // Reset to default (2, 4, 8 selected)
+            function resetCheckboxes() {
+                document.getElementById('wholeNoteCheckbox').checked = false;
+                document.getElementById('halfNoteCheckbox').checked = true;
+                document.getElementById('quarterNoteCheckbox').checked = true;
+                document.getElementById('eighthNoteCheckbox').checked = true;
+                document.getElementById('sixteenthNoteCheckbox').checked = false;
+                saveCheckboxStates();
+            }
 
-                let barBeats = 0;
-                let lastNoteType = null; // Track the last note type
-                let consecutiveCount = 0; // Track consecutive notes of the same type
+            // Add event listeners to save changes
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', saveCheckboxStates);
+            });
 
-                while (barBeats < beatsPerBar) {
-                    let randomNote;
+            // Load initial states on page load
+            window.onload = loadCheckboxStates;
 
-                    // Apply Markov chain logic
-                    if (lastNoteType === "4" && consecutiveCount === 1) {
-                        // After a 4th note, 10% chance to repeat, 90% random
-                        if (Math.random() < 0.1) {
-                            console.log("Repeating 4th note");
-                            randomNote = availableNoteLengths.find(note => note.name === "4");
+            // Function to generate a random rhythm
+            function generateRhythm() {
+                const rhythmDisplay = document.getElementById('rhythmDisplay');
+                rhythmDisplay.innerHTML = ''; // Clear previous rhythm
+
+                // Get selected note lengths
+                const availableNoteLengths = allNoteLengths.filter(note => {
+                    if (note.name === "1") return document.getElementById('wholeNoteCheckbox').checked;
+                    if (note.name === "2") return document.getElementById('halfNoteCheckbox').checked;
+                    if (note.name === "4") return document.getElementById('quarterNoteCheckbox').checked;
+                    if (note.name === "8") return document.getElementById('eighthNoteCheckbox').checked;
+                    if (note.name === "") return document.getElementById('sixteenthNoteCheckbox').checked;
+                });
+
+                // If no notes are selected, use defaults (2, 4, 8)
+                if (availableNoteLengths.length === 0) {
+                    availableNoteLengths.push(
+                        { name: "2", value: 2 },
+                        { name: "4", value: 1 },
+                        { name: "8", value: 0.5 }
+                    );
+                }
+
+                // Create a container for each bar
+                for (let bar = 0; bar < totalBars; bar++) {
+                    const barContainer = document.createElement('div');
+                    barContainer.className = 'bar';
+                    rhythmDisplay.appendChild(barContainer);
+
+                    let barBeats = 0;
+                    let lastNoteType = null;
+                    let consecutiveCount = 0;
+
+                    while (barBeats < beatsPerBar) {
+                        let randomNote;
+
+                        // Apply Markov chain logic
+                        if (lastNoteType === "4" && consecutiveCount === 1) {
+                            if (Math.random() < 0.1) {
+                                console.log("Repeating 4th note");
+                                randomNote = availableNoteLengths.find(note => note.name === "4");
+                            } else {
+                                randomNote = getRandomNote(availableNoteLengths, "4");
+                            }
+                        } else if (lastNoteType === "8" && consecutiveCount < 4) {
+                            if (Math.random() < 0.5) {
+                                console.log("Repeating 8th note");
+                                randomNote = availableNoteLengths.find(note => note.name === "8");
+                            } else {
+                                randomNote = getRandomNote(availableNoteLengths, "8");
+                            }
+                        } else if (lastNoteType === "" && consecutiveCount < 2) {
+                            if (Math.random() < 0.8) {
+                                console.log("Repeating 16th note");
+                                randomNote = availableNoteLengths.find(note => note.name === "");
+                            } else {
+                                randomNote = getRandomNote(availableNoteLengths, "");
+                            }
                         } else {
-                            randomNote = getRandomNote(availableNoteLengths, "4");
-                        }
-                    } else if (lastNoteType === "8" && consecutiveCount < 4) {
-                        // After an 8th note, 50% chance to repeat, 50% random
-                        if (Math.random() < 0.5) {
-                            console.log("Repeating 8th note");
-                            randomNote = availableNoteLengths.find(note => note.name === "8");
-                        } else {
-                            randomNote = getRandomNote(availableNoteLengths, "8");
-                        }
-                    } else if (lastNoteType === "" && consecutiveCount < 2) {
-                        // After a 16th note, 80% chance to repeat, 20% random
-                        if (Math.random() < 0.8) {
-                            console.log("Repeating 16th note");
-                            randomNote = availableNoteLengths.find(note => note.name === "");
-                        } else {
-                            randomNote = getRandomNote(availableNoteLengths, "");
-                        }
-                    } else {
-                        // Randomly select a note length
-                        randomNote = availableNoteLengths[Math.floor(Math.random() * availableNoteLengths.length)];
-                    }
-
-                    // Ensure the note fits in the remaining beats of the bar
-                    if (randomNote.value <= (beatsPerBar - barBeats)) {
-                        // Create a note element
-                        const noteElement = document.createElement('div');
-                        noteElement.className = 'note';
-                        noteElement.textContent = randomNote.name;
-
-                        // Set the width of the note based on its length
-                        const noteWidth = (randomNote.value / 4) * baseWidth;
-                        noteElement.style.width = `${noteWidth}px`;
-
-                        // Adjust font size for smaller boxes
-                        if (randomNote.value === 0.5) {
-                            noteElement.style.fontSize = "14px"; // Smaller font for 8th notes
+                            randomNote = availableNoteLengths[Math.floor(Math.random() * availableNoteLengths.length)];
                         }
 
-                        barContainer.appendChild(noteElement);
+                        // Ensure the note fits and exists
+                        if (randomNote && randomNote.value <= (beatsPerBar - barBeats)) {
+                            const noteElement = document.createElement('div');
+                            noteElement.className = 'note';
+                            noteElement.textContent = randomNote.name;
 
-                        // Update the beats used in the current bar
-                        barBeats += randomNote.value;
+                            const noteWidth = (randomNote.value / 4) * baseWidth;
+                            noteElement.style.width = `${noteWidth}px`;
 
-                        // Update lastNoteType and consecutiveCount
-                        if (randomNote.name === lastNoteType) {
-                            consecutiveCount++;
-                        } else {
-                            lastNoteType = randomNote.name;
-                            consecutiveCount = 1;
-                        }
+                            if (randomNote.value <= 0.5) {
+                                noteElement.style.fontSize = "14px";
+                            }
 
-                        // Reset consecutiveCount if max is reached
-                        if ((lastNoteType === "8" && consecutiveCount === 4) || (lastNoteType === "" && consecutiveCount === 2)) {
-                            console.log("Resetting consecutive count");
-                            consecutiveCount = 0;
+                            barContainer.appendChild(noteElement);
+                            barBeats += randomNote.value;
+
+                            if (randomNote.name === lastNoteType) {
+                                consecutiveCount++;
+                            } else {
+                                lastNoteType = randomNote.name;
+                                consecutiveCount = 1;
+                            }
+
+                            if ((lastNoteType === "8" && consecutiveCount === 4) || (lastNoteType === "" && consecutiveCount === 2)) {
+                                console.log("Resetting consecutive count");
+                                consecutiveCount = 0;
+                            }
                         }
                     }
                 }
             }
-        }
 
-        // Helper function to get a random note, excluding a specific type
-        function getRandomNote(availableNoteLengths, excludeType) {
-            const filteredNotes = availableNoteLengths.filter(note => note.name !== excludeType);
-            return filteredNotes[Math.floor(Math.random() * filteredNotes.length)];
-        }
-
-
-    </script>
-
+            // Helper function to get a random note, excluding a specific type
+            function getRandomNote(availableNoteLengths, excludeType) {
+                const filteredNotes = availableNoteLengths.filter(note => note.name !== excludeType);
+                return filteredNotes[Math.floor(Math.random() * filteredNotes.length)];
+            }
+        </script>
 </body>
 
 </html>
