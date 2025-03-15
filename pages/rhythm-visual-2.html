@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-Bar Visual Rhythm Generator with Rests</title>
+    <link rel="stylesheet" href="styles-2.css">
+    <style>
+        #back {
+            width: 100%;
+            box-sizing: border-box;
+            padding-top: 20px;
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        .bar {
+            margin-bottom: 20px;
+            margin-left: 10px;
+            padding: 10px;
+            border: 2px solid;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .note {
+            display: inline-block;
+            height: 60px;
+            line-height: 60px;
+            margin: 1px;
+            border: 1px solid;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: center;
+            overflow: hidden;
+            background-color: rgb(51, 48, 48);
+        }
+
+        .rest {
+            display: inline-block;
+            height: 60px;
+            line-height: 60px;
+            margin: 1px;
+            border: 1px solid;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: center;
+            overflow: hidden;
+            background-color: rgb(100, 100, 100);
+            /* Gray for rests */
+        }
+
+        .options {
+            margin-top: 10px;
+        }
+
+        .options label {
+            display: inline-block;
+            /* Keeps checkboxes on one line if space allows */
+            margin-right: 10px;
+            /* Adds spacing between checkboxes */
+        }
+
+        .rest-chance-container {
+            margin-top: 10px;
+            /* Space above the rest chance section */
+            display: flex;
+            /* Use flexbox for inline layout */
+            align-items: center;
+            /* Vertically center the label and select */
+            gap: 10px;
+            /* Space between label and select */
+            flex-wrap: wrap;
+            /* Allows wrapping if screen is too narrow */
+        }
+
+        .rest-chance-container p {
+            margin: 0;
+            /* Remove default paragraph margins */
+            white-space: nowrap;
+            /* Prevent "Rest Chance:" from breaking into two lines */
+        }
+
+        @media (max-width: 300px) {
+            .rest-chance-container {
+                flex-direction: column;
+                /* Stack vertically on very small screens */
+                align-items: flex-start;
+                /* Align left when stacked */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="back">
+        <a href="../index.html">[back]</a>
+    </div>
+    <h1>2-Bar Visual Rhythm Generator</h1>
+    <button onclick="generateRhythm()">Generate Rhythm</button>
+    <button onclick="resetCheckboxes()">Reset to 2,4,8</button>
+
+    <div class="options" style="margin-top: 10px;">
+        <label><input type="checkbox" id="wholeNoteCheckbox">(1)</label>
+        <label><input type="checkbox" id="halfNoteCheckbox" checked>(2)</label>
+        <label><input type="checkbox" id="quarterNoteCheckbox" checked>(4)</label>
+        <label><input type="checkbox" id="eighthNoteCheckbox" checked>(8)</label>
+        <label><input type="checkbox" id="sixteenthNoteCheckbox">(16)</label>
+        <div class="rest-chance-container">
+            <p>Rest Chance:</p>
+            <select id="restChance">
+                <option value="0">0%</option>
+                <option value="5">5%</option>
+                <option value="10" selected>10%</option>
+                <option value="15">15%</option>
+                <option value="20">20%</option>
+                <option value="25">25%</option>
+                <option value="30">30%</option>
+                <option value="35">35%</option>
+                <option value="40">40%</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="rhythmDisplay" style="margin-top: 20px;"></div>
+
+    <script>
+        const beatsPerBar = 4;
+        const totalBars = 2;
+        const baseWidth = 120;
+
+        const allNoteLengths = [
+            { name: "1", value: 4 },
+            { name: "2", value: 2 },
+            { name: "4", value: 1 },
+            { name: "8", value: 0.5 },
+            { name: "", value: 0.25 }
+        ];
+
+        // Load and save checkbox states
+        function loadCheckboxStates() {
+            const defaultStates = {
+                wholeNoteCheckbox: false,
+                halfNoteCheckbox: true,
+                quarterNoteCheckbox: true,
+                eighthNoteCheckbox: true,
+                sixteenthNoteCheckbox: false
+            };
+            for (let id in defaultStates) {
+                const savedState = localStorage.getItem(id);
+                document.getElementById(id).checked = savedState !== null ? JSON.parse(savedState) : defaultStates[id];
+            }
+            const savedRestChance = localStorage.getItem('restChance');
+            document.getElementById('restChance').value = savedRestChance !== null ? savedRestChance : "10";
+        }
+
+        function saveCheckboxStates() {
+            const checkboxIds = ['wholeNoteCheckbox', 'halfNoteCheckbox', 'quarterNoteCheckbox', 'eighthNoteCheckbox', 'sixteenthNoteCheckbox'];
+            checkboxIds.forEach(id => localStorage.setItem(id, document.getElementById(id).checked));
+            localStorage.setItem('restChance', document.getElementById('restChance').value);
+        }
+
+        function resetCheckboxes() {
+            document.getElementById('wholeNoteCheckbox').checked = false;
+            document.getElementById('halfNoteCheckbox').checked = true;
+            document.getElementById('quarterNoteCheckbox').checked = true;
+            document.getElementById('eighthNoteCheckbox').checked = true; // Fixed typo here
+            document.getElementById('sixteenthNoteCheckbox').checked = false;
+            document.getElementById('restChance').value = "10"; // Reset rest chance to 10%
+            saveCheckboxStates();
+        }
+
+        document.querySelectorAll('input[type="checkbox"], #restChance').forEach(element => {
+            element.addEventListener('change', saveCheckboxStates);
+        });
+
+        window.onload = loadCheckboxStates;
+
+        function generateRhythm() {
+            const rhythmDisplay = document.getElementById('rhythmDisplay');
+            rhythmDisplay.innerHTML = '';
+
+            const availableNotes = allNoteLengths.filter(note => {
+                if (note.name === "1") return document.getElementById('wholeNoteCheckbox').checked;
+                if (note.name === "2") return document.getElementById('halfNoteCheckbox').checked;
+                if (note.name === "4") return document.getElementById('quarterNoteCheckbox').checked;
+                if (note.name === "8") return document.getElementById('eighthNoteCheckbox').checked;
+                if (note.name === "") return document.getElementById('sixteenthNoteCheckbox').checked;
+            });
+
+            if (availableNotes.length === 0) {
+                availableNotes.push(
+                    { name: "2", value: 2 },
+                    { name: "4", value: 1 },
+                    { name: "8", value: 0.5 }
+                );
+            }
+
+            // Filter rests to match selected note durations, excluding 1 and 2
+            const availableRests = availableNotes
+                .filter(note => note.value <= 1) // Exclude 1 (4 beats) and 2 (2 beats)
+                .map(note => ({ name: "r", value: note.value }));
+
+            const restChance = parseInt(document.getElementById('restChance').value) / 100;
+
+            for (let bar = 0; bar < totalBars; bar++) {
+                const barContainer = document.createElement('div');
+                barContainer.className = 'bar';
+                rhythmDisplay.appendChild(barContainer);
+
+                let barBeats = 0;
+                let lastNoteType = null;
+                let consecutiveCount = 0;
+
+                while (barBeats < beatsPerBar) {
+                    let randomNote;
+
+                    if (lastNoteType === "4" && consecutiveCount === 1) {
+                        if (Math.random() < 0.1) randomNote = availableNotes.find(note => note.name === "4");
+                        else randomNote = getRandomNote(availableNotes, "4");
+                    } else if (lastNoteType === "8" && consecutiveCount < 4) {
+                        if (Math.random() < 0.5) randomNote = availableNotes.find(note => note.name === "8");
+                        else randomNote = getRandomNote(availableNotes, "8");
+                    } else if (lastNoteType === "" && consecutiveCount < 2) {
+                        if (Math.random() < 0.8) randomNote = availableNotes.find(note => note.name === "");
+                        else randomNote = getRandomNote(availableNotes, "");
+                    } else {
+                        randomNote = availableNotes[Math.floor(Math.random() * availableNotes.length)];
+                    }
+
+                    if (randomNote && randomNote.value <= (beatsPerBar - barBeats)) {
+                        let isRest = Math.random() < restChance && randomNote.value <= 1; // Only apply rest chance if duration <= 1
+                        let elementType = isRest ? 'rest' : 'note';
+                        let displayText = isRest ? 'r' : randomNote.name;
+                        let duration = randomNote.value;
+
+                        if (isRest) {
+                            randomNote = availableRests.find(rest => rest.value === duration);
+                        }
+
+                        const element = document.createElement('div');
+                        element.className = elementType;
+                        element.textContent = displayText;
+
+                        const noteWidth = (duration / 4) * baseWidth;
+                        element.style.width = `${noteWidth}px`;
+                        if (duration <= 0.5) element.style.fontSize = "14px";
+
+                        barContainer.appendChild(element);
+                        barBeats += duration;
+
+                        if (randomNote.name === lastNoteType) consecutiveCount++;
+                        else {
+                            lastNoteType = randomNote.name;
+                            consecutiveCount = 1;
+                        }
+
+                        if ((lastNoteType === "8" && consecutiveCount === 4) || (lastNoteType === "" && consecutiveCount === 2)) {
+                            consecutiveCount = 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        function getRandomNote(availableNotes, excludeType) {
+            const filteredNotes = availableNotes.filter(note => note.name !== excludeType);
+            return filteredNotes[Math.floor(Math.random() * filteredNotes.length)];
+        }
+    </script>
+</body>
+
+</html>
