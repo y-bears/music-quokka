@@ -4,7 +4,7 @@
 <head>
   <title>Scale Selector</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="ch-in-scale.js"></script>
+
   <link rel="stylesheet" href="styles-2.css">
   <style>
     .container {
@@ -81,12 +81,22 @@
       <button class="button" onclick="selectRandom()">Random</button>
     </div>
 
+    <label class="switch">
+      <input type="checkbox" id="convertSwitch" checked>
+      <span class="slider"></span>
+    </label>
+    <span>Convert ♭ to #</span>
+
+
     <!-- Display selected scale -->
     <div id="selectedScale"></div>
 
     <!-- Output for chords -->
     <div id="chordsOutput"></div>
+
   </div>
+
+  <script src="ch-in-scale.js"></script>
 </body>
 
 </html>

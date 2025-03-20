@@ -1,5 +1,5 @@
 // Define available scales and their chords
-const scales = {
+/*const scales = {
   'C major': ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'],
   'C# major': ['C#', 'D#m', 'Fm', 'F#', 'G#', 'A#m', 'Cdim'],
   'Db major': ['Db', 'Ebm', 'Fm', 'Gb', 'Ab', 'Bbm', 'Cdim'],
@@ -34,10 +34,45 @@ const scales = {
   'G minor': ['Gm', 'Adim', 'Bb', 'Cm', 'Dm', 'Eb', 'F'],
   'G# minor': ['G#m', 'A#dim', 'B', 'C#m', 'D#m', 'E', 'F#'],
   'Ab minor': ['Abm', 'Bbdim', 'B', 'Dbm', 'Ebm', 'E', 'Gb']
+};*/
+
+//modified scales for this app
+const scales = {
+  'C major': ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'],
+  'C# major': ['C#', 'D#m', 'Fm', 'F#', 'G#', 'A#m', 'Cdim'],
+  'D major': ['D', 'Em', 'F#m', 'G', 'A', 'Bm', 'C#dim'],
+  'D# major': ['D#', 'Fm', 'Gm', 'G#', 'A#', 'Cm', 'Ddim'],
+  'E major': ['E', 'F#m', 'G#m', 'A', 'B', 'C#m', 'D#dim'],
+  'F major': ['F', 'Gm', 'Am', 'Bb', 'C', 'Dm', 'Edim'],
+  'F# major': ['F#', 'G#m', 'A#m', 'B', 'C#', 'D#m', 'Fdim'],
+  'G major': ['G', 'Am', 'Bm', 'C', 'D', 'Em', 'F#dim'],
+  'G# major': ['G#', 'A#m', 'Cm', 'C#', 'D#', 'Fm', 'Gdim'],
+  'A major': ['A', 'Bm', 'C#m', 'D', 'E', 'F#m', 'G#dim'],
+  'A# major': ['A#', 'Cm', 'Dm', 'D#', 'F', 'Gm', 'Adim'],
+  'B major': ['B', 'C#m', 'D#m', 'E', 'F#', 'G#m', 'A#dim'],
+  'A minor': ['Am', 'Bdim', 'C', 'Dm', 'Em', 'F', 'G'],
+  'A# minor': ['A#m', 'Cdim', 'C#', 'D#m', 'Fm', 'F#', 'G#'],
+  'B minor': ['Bm', 'C#dim', 'D', 'Em', 'F#m', 'G', 'A'],
+  'C minor': ['Cm', 'Ddim', 'Eb', 'Fm', 'Gm', 'Ab', 'Bb'],
+  'C# minor': ['C#m', 'D#dim', 'E', 'F#m', 'G#m', 'A', 'B'],
+  'D minor': ['Dm', 'Edim', 'F', 'Gm', 'Am', 'Bb', 'C'],
+  'D# minor': ['D#m', 'Fdim', 'F#', 'G#m', 'A#m', 'B', 'C#'],
+  'E minor': ['Em', 'F#dim', 'G', 'Am', 'Bm', 'C', 'D'],
+  'F minor': ['Fm', 'Gdim', 'Ab', 'Bbm', 'Cm', 'Db', 'Eb'],
+  'F# minor': ['F#m', 'G#dim', 'A', 'Bm', 'C#m', 'D', 'E'],
+  'G minor': ['Gm', 'Adim', 'Bb', 'Cm', 'Dm', 'Eb', 'F'],
+  'G# minor': ['G#m', 'A#dim', 'B', 'C#m', 'D#m', 'E', 'F#'],
+
 };
 
-
-
+// same notes
+const sameNotes = {
+  "Bb": "A#",
+  "Eb": "D#",
+  "Ab": "G#",
+  "Db": "C#",
+  "Gb": "F#"
+};
 
 
 // Define note buttons
@@ -58,6 +93,16 @@ for (const [scale, chords] of Object.entries(scales)) {
 // Current selection variables
 let selectedNote = 'A';
 let selectedMode = 'minor';
+
+// Get the switch element and the output element
+const convertSwitch = document.getElementById('convertSwitch');
+const chordsOutput = document.getElementById('chordsOutput');
+const selectedScale = document.getElementById('selectedScale');
+
+// Check if there's a saved state for the switch in localStorage
+if (localStorage.getItem('convertSwitchState') === 'false') {
+  convertSwitch.checked = false; // Uncheck the switch if previously unchecked
+}
 
 // Initialize function to set up the UI
 function initialize() {
@@ -166,7 +211,9 @@ function updateSelectedScaleButton() {
   }
 }
 
-// Function to output the selected chords and scale
+
+
+// Function to output the chords
 function outputChords() {
   const scale = `${selectedNote} ${selectedMode}`;
   let chords;
@@ -177,20 +224,39 @@ function outputChords() {
     chords = minorScales[scale];
   }
 
-  const chordsOutput = document.getElementById('chordsOutput');
-  const selectedScale = document.getElementById('selectedScale');
-
   if (chords) {
-    // Display the selected scale
     selectedScale.textContent = `Selected Scale: ${selectedNote} ${selectedMode}`;
 
-    // Display the chords in the selected scale with bold and blue styling for chord names
-    chordsOutput.innerHTML = chords.map((chord, index) => {
+    console.log("Original chords:", chords);
+
+    // Apply conversion only if the switch is checked
+    const convertedChords = chords.map(chord => {
+      if (convertSwitch.checked) {
+        return sameNotes[chord] || chord; // Convert only if enabled
+      }
+      return chord; // Otherwise, return as is
+    });
+
+    console.log("Converted chords:", convertedChords);
+
+    chordsOutput.innerHTML = convertedChords.map((chord, index) => {
       return `<span style="display: inline-block;">[${index + 1}]&nbsp;<span style="font-weight: bold;" class="alternate-color">${chord}</span></span> `;
     }).join('');
   } else {
-    // Display a message if no scale is available
     selectedScale.textContent = `Selected Scale: N/A`;
     chordsOutput.textContent = 'No scale available';
   }
 }
+
+// Listen for switch changes and save state to localStorage
+convertSwitch.addEventListener('change', () => {
+  // Save the current state of the switch
+  localStorage.setItem('convertSwitchState', convertSwitch.checked);
+
+  // Update the chords output after the switch is toggled
+  outputChords();
+});
+
+// Call the function on initial load
+outputChords();
+
