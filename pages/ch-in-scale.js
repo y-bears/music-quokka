@@ -240,7 +240,7 @@ function outputChords() {
     console.log("Converted chords:", convertedChords);
 
     chordsOutput.innerHTML = convertedChords.map((chord, index) => {
-      return `<span style="display: inline-block;">[${index + 1}]&nbsp;<span style="font-weight: bold;" class="alternate-color">${chord}</span></span> `;
+      return `<span style="display: inline-block;"><span class="alternate-color" style="font-weight: bold;">[${index + 1}]</span><span style="font-weight: bold;">${chord}</span></span> `;
     }).join('');
   } else {
     selectedScale.textContent = `Selected Scale: N/A`;

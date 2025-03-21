@@ -159,7 +159,7 @@ function getChords(ch_num, selectedScale) {
 
 
 function rhythm() {
-    let meas = [0.5, 1, 1, 1];
+    let meas = [0.5, 0.75, 1, 1, 1, 1, 1, 1, 1, 1];
     let rhythm = [];
     let a = 0;
     let i = 0;
@@ -171,8 +171,13 @@ function rhythm() {
         if (rhythm[i] === 0.5) {
             rhythm[i + 1] = 0.5;
             a += 1; // Since two 0.5's make 1
-            i += 2;
-            meas = [0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+            i += 2; // because we have two 0.5's
+            meas = [0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // after alreade we have 0.5, chances are lower
+        } else if (rhythm[i] === 0.75) {
+            rhythm[i + 1] = 0.25;
+            a += 1; // Since 0.75 + 0.25 = 1
+            i += 2; // because we have 0.75 and 0.25, two elements
+            meas = [0.75, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
         } else {
             a += rhythm[i];
             i++;
