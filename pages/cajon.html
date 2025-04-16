@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cajon Pattern Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #282c34;
+            /* Dark background */
+            color: #abb2bf;
+            /* Lighter text for contrast */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px;
+            min-height: 100vh;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        h1,
+        h2 {
+            color: #61afef;
+            /* A distinct color for headings */
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #e5c07b;
+            /* Different color for sub-heading */
+        }
+
+        .controls {
+            background-color: #3a3f4b;
+            /* Slightly lighter dark */
+            padding: 18px 28px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            /* Spacing between elements */
+        }
+
+        label {
+            font-weight: bold;
+            color: #c8ccd4;
+        }
+
+        select,
+        button {
+            padding: 10px 15px;
+            border: 1px solid #5c6370;
+            border-radius: 5px;
+            background-color: #4b5263;
+            /* Darker elements */
+            color: #e0e0e0;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        select:focus,
+        button:focus {
+            outline: 2px solid #61afef;
+            /* Focus indicator using heading color */
+            outline-offset: 2px;
+            border-color: #61afef;
+        }
+
+        button:hover {
+            background-color: #525a6a;
+            /* Lighter on hover */
+            border-color: #7a8294;
+        }
+
+        button:active {
+            background-color: #5c6370;
+        }
+
+        .output {
+            background-color: #3a3f4b;
+            padding: 25px 35px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            width: 90%;
+            max-width: 700px;
+            /* Limit width */
+            text-align: center;
+        }
+
+        #patternOutput {
+            font-family: 'Consolas', 'Monaco', 'Courier New', Courier, monospace;
+            /* Monospace for alignment */
+            font-size: 1.6em;
+            /* Larger pattern text */
+            color: #98c379;
+            /* A clear color for the pattern itself */
+            background-color: #21252b;
+            /* Very dark background for contrast */
+            padding: 18px;
+            border-radius: 5px;
+            border: 1px solid #5c6370;
+            letter-spacing: 0.1em;
+            /* Spacing between characters within a beat (if needed) */
+            word-spacing: 0.6em;
+            /* Spacing between beats */
+            overflow-wrap: break-word;
+            /* Wrap long patterns */
+            white-space: pre-wrap;
+            /* Allow wrapping while preserving spaces */
+            line-height: 1.5;
+        }
+
+        .density-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../index.html">
+        <h1>Random Cajon Pattern Generator</h1>
+    </a>
+    <div class="controls">
+        <label for="beatCountSelector">Beats:</label>
+        <select id="beatCountSelector">
+            <option value="8" selected>8</option>
+            <option value="12">12</option>
+            <option value="16">16</option>
+        </select>
+        <button id="generateButton">Generate New Pattern</button>
+    </div>
+
+    <div class="controls">
+        <label>Density</label>
+        <button id="increaseDensity">+</button>
+        <button id="decreaseDensity">-</button>
+    </div>
+
+    <div class="output">
+        <h2>Generated Pattern:</h2>
+        <p id="patternOutput">...</p>
+    </div>
+
+    <script>
+        const beatCountSelector = document.getElementById('beatCountSelector');
+        const generateButton = document.getElementById('generateButton');
+        const patternOutput = document.getElementById('patternOutput');
+        const increaseDensityButton = document.getElementById('increaseDensity');
+        const decreaseDensityButton = document.getElementById('decreaseDensity');
+
+        // Sound definitions
+        const BASS = 'B';
+        const TONE = 'T';
+        const SLAP = 'S';
+        const REST = '.';
+
+        let currentPattern = [];
+
+        // --- Helper Function to pick random element ---
+        function getRandomElement(arr) {
+            if (!arr || arr.length === 0) {
+                return undefined;
+            }
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        /**
+         * NEW Helper Function: Determines a sound (B, T, or S) for a given index
+         * based on the original generation probabilities, excluding REST.
+         * @param {number} index - The beat index.
+         * @returns {string} BASS, TONE, or SLAP.
+         */
+        function getSoundForIndex(index) {
+            const rand = Math.random(); // Use a fresh random number for this decision
+            let sound;
+            let totalProbNonRest; // To normalize probabilities
+
+            if (index === 0) {
+                // Original chances: B=80%, T=15%, REST=5%
+                totalProbNonRest = 0.80 + 0.15; // = 0.95
+                if (totalProbNonRest > 0) {
+                    if (rand < 0.80 / totalProbNonRest) { // Normalize: P(B | not REST)
+                        sound = BASS;
+                    } else { // Remaining probability for Tone
+                        sound = TONE;
+                    }
+                } else {
+                    sound = TONE; // Fallback if only REST was possible originally
+                }
+
+            } else if (index > 0 && index % 4 === 0) { // Beats 4, 8, 12
+                // Original chances: B=55%, T=30%, S=10%, REST=5%
+                totalProbNonRest = 0.5 + 0.2 + 0.15; // = 
+                if (totalProbNonRest > 0) {
+                    const probB_norm = 0.5 / totalProbNonRest;
+                    const probT_norm = 0.2 / totalProbNonRest;
+                    if (rand < probB_norm) {
+                        sound = BASS;
+                    } else if (rand < probB_norm + probT_norm) {
+                        sound = TONE;
+                    } else { // Remaining probability for Slap
+                        sound = SLAP;
+                    }
+                } else {
+                    sound = TONE; // Fallback
+                }
+
+            } else { // Other beats
+                // Original chances: T=50%, REST=25%, S=15%, B=10%
+                totalProbNonRest = 0.45 + 0.15 + 0.11; // = 
+                if (totalProbNonRest > 0) {
+                    const probT_norm = 0.45 / totalProbNonRest;
+                    const probS_norm = 0.15 / totalProbNonRest;
+                    if (rand < probT_norm) {
+                        sound = TONE;
+                    } else if (rand < probT_norm + probS_norm) {
+                        sound = SLAP;
+                    } else { // Remaining probability for Bass
+                        sound = BASS;
+                    }
+                } else {
+                    sound = TONE; // Fallback
+                }
+            }
+            // Final fallback just in case logic failed
+            return sound || TONE;
+        }
+
+
+        function generatePattern() {
+            // This function remains unchanged - it uses the original probabilities
+            // including the chance to generate REST directly.
+            const beatCount = parseInt(beatCountSelector.value);
+            const pattern = [];
+            for (let i = 0; i < beatCount; i++) {
+                const rand = Math.random();
+                let beat = REST;
+                if (i === 0) {
+                    if (rand < 0.80) { beat = BASS; }
+                    else if (rand < 0.95) { beat = TONE; }
+                    else { beat = REST; }
+                } else if (i > 0 && i % 4 === 0) { // b50 t20 s15 r15
+                    if (rand < 0.5) { beat = BASS; }
+                    else if (rand < 0.7) { beat = TONE; }
+                    else if (rand < 0.85) { beat = SLAP; }
+                    else { beat = REST; }
+                } else {
+                    if (rand < 0.45) { beat = TONE; } // t45 r32 s15 b11
+                    else if (rand < 0.77) { beat = REST; }
+                    else if (rand < 0.89) { beat = SLAP; }
+                    else { beat = BASS; }
+                }
+                pattern.push(beat);
+            }
+            currentPattern = pattern;
+            updatePatternDisplay();
+        }
+
+        function updatePatternDisplay() {
+            // This function remains unchanged
+            const beatCount = currentPattern.length;
+            let formattedPattern = '';
+            if (beatCount === 8) {
+                formattedPattern = currentPattern.join(' ');
+            } else if (beatCount === 12) {
+                const firstLine = currentPattern.slice(0, 8).join(' '); // Still 8+4 based on your code
+                const secondLine = currentPattern.slice(8, 12).join(' ');
+                formattedPattern = firstLine + '\n' + secondLine;
+            } else if (beatCount === 16) {
+                const firstLine = currentPattern.slice(0, 8).join(' ');
+                const secondLine = currentPattern.slice(8, 16).join(' ');
+                formattedPattern = firstLine + '\n' + secondLine;
+            } else {
+                formattedPattern = currentPattern.join(' ');
+            }
+            patternOutput.textContent = formattedPattern;
+        }
+
+        // --- MODIFIED increaseDensity function ---
+        function increaseDensity() {
+            if (!currentPattern || currentPattern.length === 0) return;
+
+            // Find indices of REST beats (unchanged)
+            const restIndices = currentPattern.reduce((acc, beat, index) => {
+                if (beat === REST) acc.push(index);
+                return acc;
+            }, []);
+
+            if (restIndices.length === 0) return; // Pattern is full
+
+            // Separate REST indices into "strong" and "other" (unchanged)
+            const strongRestIndices = restIndices.filter(i => i % 4 === 0);
+            const otherRestIndices = restIndices.filter(i => i % 4 !== 0);
+
+            let indexToChange = undefined;
+            const rand = Math.random();
+
+            // Rule I1: 70% chance to target 'strong' rest beats if available (unchanged)
+            if (rand < 0.70 && strongRestIndices.length > 0) {
+                indexToChange = getRandomElement(strongRestIndices);
+            } else if (otherRestIndices.length > 0) {
+                indexToChange = getRandomElement(otherRestIndices);
+            } else if (strongRestIndices.length > 0) {
+                indexToChange = getRandomElement(strongRestIndices);
+            }
+
+            // If we found a valid index to change
+            if (indexToChange !== undefined) {
+                // --- NEW: Get sound based on original probabilities for that index ---
+                const newSound = getSoundForIndex(indexToChange);
+                // --- End NEW ---
+
+                currentPattern[indexToChange] = newSound; // Assign the chosen sound
+                updatePatternDisplay();
+            }
+        }
+
+        // --- decreaseDensity function (remains unchanged from previous version) ---
+        function decreaseDensity() {
+            // ... (Keep the decreaseDensity function from the previous answer) ...
+            if (!currentPattern || currentPattern.length === 0) return;
+            let soundIndices = currentPattern.reduce((acc, beat, index) => {
+                if (beat !== REST) acc.push(index);
+                return acc;
+            }, []);
+            soundIndices = soundIndices.filter(index => index !== 0); // Rule D1
+            if (soundIndices.length === 0) return;
+
+            const strongSoundIndices = soundIndices.filter(i => i % 4 === 0);
+            const otherSoundIndices = soundIndices.filter(i => i % 4 !== 0);
+            let indexToChange = undefined;
+            const rand = Math.random();
+
+            // Rule D2: 70% chance to target 'other'
+            if (rand < 0.70 && otherSoundIndices.length > 0) {
+                indexToChange = getRandomElement(otherSoundIndices);
+            } else if (strongSoundIndices.length > 0) {
+                indexToChange = getRandomElement(strongSoundIndices);
+            } else if (otherSoundIndices.length > 0) { // Fallback
+                indexToChange = getRandomElement(otherSoundIndices);
+            }
+
+            if (indexToChange !== undefined) {
+                currentPattern[indexToChange] = REST;
+                updatePatternDisplay();
+            }
+        }
+
+        // --- Event Listeners (unchanged) ---
+        generateButton.addEventListener('click', generatePattern);
+        beatCountSelector.addEventListener('change', generatePattern);
+        increaseDensityButton.addEventListener('click', increaseDensity);
+        decreaseDensityButton.addEventListener('click', decreaseDensity);
+
+        generatePattern(); // Initial generation
+    </script>
+</body>
+
+</html>
